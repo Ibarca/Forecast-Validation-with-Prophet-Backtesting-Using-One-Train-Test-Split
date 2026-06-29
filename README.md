@@ -24,6 +24,16 @@ Therefore, it is not enough to simply generate a forecast. You also need to be a
 
 ## The Principle of Backtesting
 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Ibarca/Forecast-Validation-How-Do-We-Know-If-a-Forecast-Is-Good-/e3ef09854b6591477992778defc652b4c22a6a7e/Images/FCValidation.png"
+       alt="Forecast Validation Process"
+       width="600">
+</p>
+
+<br>
+
+
 A common mistake in forecasting is to train a model using all available historical data and then immediately evaluate how well the model fits the same data.
 
 This can be misleading.
