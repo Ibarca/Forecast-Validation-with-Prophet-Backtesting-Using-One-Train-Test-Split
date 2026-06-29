@@ -30,11 +30,7 @@ A forecast is ultimately an estimate of future demand. The numbers may look reas
 <br>
 
 
-One of the easiest mistakes to make in forecasting is to train a model with all the historical data available and then check how well the model explains that same past data.
-
-At first, this may look reasonable. The model follows the historical trend, captures some seasonality, and produces a forecast that seems to make sense.
-
-But this can be misleading.
+One of the easiest mistakes to make in forecasting is to train a model with all the historical data available and then check how well the model explains that same past data. At first, this may look reasonable. The model follows the historical trend, captures some seasonality, and produces a forecast that seems to make sense, but this can be misleading.
 
 A forecast is not valuable only because it explains what already happened. Its real value comes from its ability to predict periods the model has not seen before.
 
@@ -46,6 +42,13 @@ Instead of giving the model the full history, I split the data into two parts. T
 | ------------------- | --------------- |
 | Jan 2020 - Dec 2023 | Training Data   |
 | Jan 2024 - Dec 2024 | Validation Data |
+
+<p align="center">
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/prophet_5yr_split_with_full_dataset%20(1).png"
+       alt="Forecast Validation Process"
+       width="600">
+</p>
+
 
 The model learns only from the training period. Then, it is asked to forecast the validation period.
 
