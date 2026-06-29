@@ -1,5 +1,13 @@
 # How I Validate the Forecast: Backtesting with One Train-Test Split
 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Ibarca/Forecast-Validation-How-Do-We-Know-If-a-Forecast-Is-Good-/e3ef09854b6591477992778defc652b4c22a6a7e/Images/FCValidation.png"
+       alt="Forecast Validation Process"
+       width="600">
+</p>
+
+
 In my previous article, I showed how to build a sales forecast using Prophet. At first glance, it can feel like the hard part is done once the model generates a forecast. After all, we have historical data, we train a model, and it produces predictions for the future.
 
 But there is an important question that comes before we use those predictions to make decisions:
