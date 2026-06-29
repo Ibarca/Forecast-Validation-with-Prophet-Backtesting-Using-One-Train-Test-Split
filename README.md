@@ -35,7 +35,7 @@ A forecast is not valuable only because it explains what already happened. Its r
 
 This is where backtesting and the train-test split become important.
 
-| 💡 **Definition: Train-test split**  |
+| 💡 **Definition: Train-test split**                                                                                                                                                                                                                                                                                                                                                                                 |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | A **train-test split** is a validation technique used in machine learning where the available data is divided into two parts: a **training set** and a **test set**.<br><br>• The **training set** is used to teach the model and allow it to learn patterns from historical data.<br><br>• The **test set** is kept separate and used only to evaluate how well the model performs on data it has not seen before. |
 
