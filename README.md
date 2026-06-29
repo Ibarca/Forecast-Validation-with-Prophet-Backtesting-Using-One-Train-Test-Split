@@ -51,9 +51,7 @@ The important detail is that the model does not see the validation data during t
 
 **If I had used this model in the past, how well would it have predicted actual demand?**
 
-This makes the validation process much closer to a real business situation. When a planner creates a forecast, future demand is unknown. Backtesting recreates that situation using historical data.
-
-This is especially important in time series forecasting because the order of the data matters. We cannot randomly shuffle past observations into training and test sets. The model must always learn from the past and be tested on a later period.
+This makes the validation process much closer to a real business situation. When a planner creates a forecast, future demand is unknown. Backtesting recreates that situation using historical data. This is especially important in time series forecasting because the order of the data matters. We cannot randomly shuffle past observations into training and test sets. The model must always learn from the past and be tested on a later period.
 
 Only then can we understand whether the forecast is actually useful for predicting what comes next.
 
