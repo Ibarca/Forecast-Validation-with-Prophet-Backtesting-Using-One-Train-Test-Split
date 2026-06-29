@@ -37,10 +37,6 @@ This is where backtesting becomes important.
 
 Instead of giving the model the full history, I split the data into two parts. The first part is used to train the model. The second part is kept aside as a validation period.
 
-| Period              | Usage           |
-| ------------------- | --------------- |
-| Jan 2020 - Dec 2023 | Training Data   |
-| Jan 2024 - Dec 2024 | Validation Data |
 
 <p align="center">
   <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/prophet_5yr_split_with_full_dataset%20(1).png"
