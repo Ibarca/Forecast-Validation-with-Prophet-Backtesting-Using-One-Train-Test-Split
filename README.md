@@ -17,24 +17,12 @@ But there is an important question that comes before we use those predictions to
 A forecast is ultimately an estimate of future demand. The numbers may look reasonable, but without evaluating the model's performance, we have no way of knowing whether those predictions are actually useful. A sophisticated model can still produce poor forecasts, and relying on inaccurate forecasts can lead to costly business decisions.
 
 
-## Why Forecast Validation Matters
-
-Imagine a forecast predicts sales of 1,000 units next month.
-
-* If actual sales are 990 units, the forecast is very accurate.
-* If actual sales are 600 units, relying on that forecast could lead to excess inventory, unnecessary purchasing, and poor planning decisions.
-
-Without validation, we are simply trusting the model without evidence. This becomes especially important when you are responsible for the forecasting process. In a business environment, people will rightly question the reliability of your work, especially when forecasted numbers deviate from reality, or when demand is affected by strong seasonality, volatility, promotions, or unusual market behavior.
-
-Therefore, it is not enough to simply generate a forecast. You also need to be able to explain how accurate the forecast is, where the model performs well, where it struggles, and whether the historical data is reliable enough to support future predictions. Forecast validation gives us a quantifiable way to answer these uncomfortable but necessary questions before the forecast is used for planning decisions.
-
-
 
 ## The Principle of Backtesting
 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Ibarca/Forecast-Validation-How-Do-We-Know-If-a-Forecast-Is-Good-/e3ef09854b6591477992778defc652b4c22a6a7e/Images/FCValidation.png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/prophet_5yr_split_with_full_dataset%20(1).png"
        alt="Forecast Validation Process"
        width="600">
 </p>
