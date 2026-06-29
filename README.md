@@ -2,7 +2,7 @@
 
 
 <p align="center">
-  <img src="[https://raw.githubusercontent.com/Ibarca/Forecast-Validation-How-Do-We-Know-If-a-Forecast-Is-Good-/e3ef09854b6591477992778defc652b4c22a6a7e/Images/FCValidation.png](https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_process%20(1).png)"
+  <img src="https://raw.githubusercontent.com/Ibarca/Forecast-Validation-How-Do-We-Know-If-a-Forecast-Is-Good-/e3ef09854b6591477992778defc652b4c22a6a7e/Images/FCValidation.png](https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_process%20(1).png"
        alt="Forecast Validation Process"
        width="600">
 </p>
