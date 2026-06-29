@@ -15,11 +15,6 @@ A sophisticated model can still produce poor forecasts, and relying on inaccurat
 ## The Principle of Backtesting
 
 
-<p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_process%20(1).png"
-       alt="Forecast Validation Process"
-       width="600">
-</p>
 
 
 
@@ -67,18 +62,17 @@ The second part is kept aside as the **test period**. This period is not shown t
 
 The process works like this:
 
-```text
-Historical Data
-      ↓
-Train-Test Split
-      ↓
-Train the Model on the Training Period
-      ↓
-Forecast the Test Period
-      ↓
-Compare Forecast vs Actual Sales
-      ↓
-Evaluate Forecast Accuracy
+
+
+<p align="center">
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_process%20(1).png"
+       alt="Forecast Validation Process"
+       width="600">
+</p>
+
+
+
+
 
 The important detail is that the model does not see the test data during training. Because the test period already happened in real life, I can compare the forecast with the actual sales and measure how accurate the model would have been.
 
