@@ -57,16 +57,17 @@ Instead of giving the model the full history, I split the data into two parts. T
 </p>
 
 
-How the Validation Process Works
+## How the Validation Process Works
 
 Instead of giving the model the full history, I split the data into two parts.
 
-The first part is used as the training period. This is the data the model is allowed to learn from.
+The first part is used as the **training period**. This is the data the model is allowed to learn from.
 
-The second part is kept aside as the test period. This period is not shown to the model during training. From the model’s perspective, this test period represents the future.
+The second part is kept aside as the **test period**. This period is not shown to the model during training. From the model’s perspective, this test period represents the future.
 
 The process works like this:
 
+```text
 Historical Data
       ↓
 Train-Test Split
@@ -154,17 +155,4 @@ A forecast should not be accepted only because the model looks sophisticated. It
 Backtesting provides that evidence. It allows us to evaluate the model before using it to make decisions about purchasing, inventory, staffing, or capacity planning.
 
 By testing the forecast on a historical period that was excluded from training, we can better understand whether the model is reliable enough to support business decisions.
-
-Conclusion
-
-Backtesting helps answer one of the most important questions in forecasting:
-
-Can we trust the forecast?
-
-By using a train-test split, I can simulate a real forecasting situation. The model learns from the past, predicts a later period, and then I compare those predictions with what actually happened.
-
-This does not guarantee that the future forecast will be perfect. But it gives me a structured way to evaluate whether the model has learned useful patterns or whether it is only fitting the past.
-
-Before using a forecast to make business decisions, it is necessary to validate it.
-
 Only then can we understand whether the forecast is actually useful for predicting what comes next.
