@@ -1,4 +1,4 @@
-# Forecast Validation: How Do We Know If a Forecast Is Good?
+# How I Validate the Forecast: Backtesting with One Train-Test Split
 
 In my previous article, I showed how to build a sales forecast using Prophet. At first glance, it can feel like the hard part is done once the model generates a forecast. After all, we have historical data, we train a model, and it produces predictions for the future.
 
@@ -34,32 +34,38 @@ Therefore, it is not enough to simply generate a forecast. You also need to be a
 <br>
 
 
-A common mistake in forecasting is to train a model using all available historical data and then immediately evaluate how well the model fits the same data.
+One of the easiest mistakes to make in forecasting is to train a model with all the historical data available and then check how well the model explains that same past data.
 
-This can be misleading.
+At first, this may look reasonable. The model follows the historical trend, captures some seasonality, and produces a forecast that seems to make sense.
 
-A forecasting model should not only explain the past. It should be able to predict periods it has not seen before.
+But this can be misleading.
 
-Instead, forecasting models should be tested on historical periods that were excluded from the training process. This process is known as **backtesting**.
+A forecast is not valuable only because it explains what already happened. Its real value comes from its ability to predict periods the model has not seen before.
+
+This is where backtesting becomes important.
+
+Instead of giving the model the full history, I split the data into two parts. The first part is used to train the model. The second part is kept aside as a validation period.
 
 | Period              | Usage           |
 | ------------------- | --------------- |
 | Jan 2020 - Dec 2023 | Training Data   |
 | Jan 2024 - Dec 2024 | Validation Data |
 
-The model learns from the training period and then generates forecasts for the validation period. These forecasts are compared against the actual values from that same validation period.
+The model learns only from the training period. Then, it is asked to forecast the validation period.
 
-The important point is that the model never sees the validation period during training.
+The important detail is that the model does not see the validation data during training. From the model’s perspective, this period represents the future.
 
-This simulates a real business scenario where future demand is unknown at the moment the forecast is created.
+Because the validation period already happened in real life, I can compare the forecast with the actual sales and measure how accurate the model would have been.
 
-The key question becomes:
+In other words, backtesting allows me to ask a very practical question:
 
-> If this model had been used in the past, how accurately would it have predicted actual sales?
+If I had used this model in the past, how well would it have predicted actual demand?
 
-If the answer is satisfactory, we can have greater confidence when using the model to forecast future periods.
+This makes the validation process much closer to a real business situation. When a planner creates a forecast, future demand is unknown. Backtesting recreates that situation using historical data.
 
-In time series forecasting, this is especially important because the order of the data matters. Unlike some machine learning problems, we cannot randomly shuffle the data into training and test sets. A forecast must always be trained on the past and tested on a later period.
+This is especially important in time series forecasting because the order of the data matters. We cannot randomly shuffle past observations into training and test sets. The model must always learn from the past and be tested on a later period.
+
+Only then can we understand whether the forecast is actually useful for predicting what comes next.
 
 ---
 
