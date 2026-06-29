@@ -1,12 +1,6 @@
 # How I Validate the Forecast: Backtesting with One Train-Test Split
 
 
-<p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_process%20(1).png"
-       alt="Forecast Validation Process"
-       width="600">
-</p>
-
 
 In my previous article, I showed how to build a sales forecast using Prophet. At first glance, it can feel like the hard part is done once the model generates a forecast. After all, we have historical data, we train a model, and it produces predictions for the future.
 
@@ -22,10 +16,15 @@ A forecast is ultimately an estimate of future demand. The numbers may look reas
 
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/prophet_5yr_split_with_full_dataset%20(1).png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_process%20(1).png"
        alt="Forecast Validation Process"
        width="600">
 </p>
+
+
+
+
+
 
 <br>
 
