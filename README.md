@@ -33,7 +33,15 @@ One of the easiest mistakes to make in forecasting is to train a model with all 
 
 A forecast is not valuable only because it explains what already happened. Its real value comes from its ability to predict periods the model has not seen before.
 
-This is where backtesting becomes important.
+This is where backtesting and the train-test split become important.
+
+| 💡 **Definition: Train-test split**  |                                                                                                                                                                                                                                                                                                                                                                               |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A **train-test split** is a validation technique used in machine learning where the available data is divided into two parts: a **training set** and a **test set**.<br><br>• The **training set** is used to teach the model and allow it to learn patterns from historical data.<br><br>• The **test set** is kept separate and used only to evaluate how well the model performs on data it has not seen before. |
+
+
+
+
 
 Instead of giving the model the full history, I split the data into two parts. The first part is used to train the model. The second part is kept aside as a validation period.
 
