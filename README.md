@@ -11,7 +11,7 @@ A forecast is ultimately an estimate of future demand. The numbers may look reas
 A sophisticated model can still produce poor forecasts, and relying on inaccurate forecasts can lead to costly business decisions. This is especially important in demand planning, where forecast errors can affect inventory levels, purchasing decisions, service levels, and working capital.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_risk_chain.png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_risk_chain%20(1).png"
        alt="Forecast Validation Process"
        width="600">
 </p>
