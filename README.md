@@ -99,12 +99,25 @@ Because the validation period has already happened in reality, I can compare two
 
 This comparison is the core of forecast validation. It allows me to calculate error metrics such as MAE, RMSE, MAPE, and Bias, and decide whether the forecast is reliable enough to support business decisions.
 
-To evaluate the difference between forecast and actual sales, I use several error metrics:
+## Measuring Forecast Accuracy
 
-- **MAE** to understand the average forecast error
-- **RMSE** to penalize larger mistakes
-- **MAPE** to express the error as a percentage
-- **Bias** to detect whether the model systematically over-forecasts or under-forecasts
+Once the forecasted values are compared with the actual sales, the next step is to measure the size and direction of the error.
 
-The goal is not only to generate a forecast, but to understand whether the forecast is accurate enough to support business decisions such as inventory planning, purchasing, service levels, and working capital management.
+A forecast will almost never be perfectly correct. Some difference between forecast and actual demand is normal. The important question is whether the error is small enough, stable enough, and unbiased enough to support business decisions.
 
+For this validation, I use four metrics:
+
+| Metric | What it tells us | Why it matters |
+|---|---|---|
+| MAE | Average size of the error | Easy to understand in units sold |
+| RMSE | Size of the error with higher penalty for large mistakes | Useful when big errors are especially costly |
+| MAPE | Error as a percentage | Useful to compare accuracy across products or periods |
+| Bias | Direction of the error | Shows whether the model tends to over-forecast or under-forecast |
+
+Each metric answers a slightly different question. For that reason, I do not rely on only one number to judge the model. A forecast can have a reasonable average error but still be systematically too high or too low. In demand planning, this distinction matters because over-forecasting and under-forecasting create different business risks.
+
+For example, a model that consistently overestimates demand may lead to excess inventory, markdowns, and higher working capital. A model that consistently underestimates demand may lead to stockouts, lost sales, and lower service levels.
+
+This is why forecast validation should look not only at how large the errors are, but also at the direction and consistency of those errors.
+
+Then after this section, you can create one subsection per metric:
