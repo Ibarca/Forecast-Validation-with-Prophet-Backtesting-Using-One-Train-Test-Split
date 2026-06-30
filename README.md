@@ -132,7 +132,45 @@ For example, if MAE is **120 units**, it means that the forecast was wrong by ar
        width="680">
 </p>
 
-This metric is easy to interpret because it uses the same unit as the original data.
+This metric is easy to interpret because it uses the same unit as the original data. 
+For example:
 
-```text
-MAE = average absolute difference between actual sales and forecasted sales
+| MAE Result | Interpretation |
+|---|---|
+| Low MAE | The forecast is close to actual demand on average |
+| High MAE | The forecast is frequently far away from actual demand |
+
+In demand planning, MAE helps answer:
+
+> On average, how many units could my forecast be wrong by?
+
+However, MAE should always be interpreted together with the sales volume. An error of 100 units may be small for a product selling 10,000 units, but very large for a product selling 200 units.
+
+
+
+
+---
+
+### RMSE: Are there large forecast mistakes?
+
+**RMSE** also measures forecast error, but it reacts more strongly to large errors.
+
+If RMSE is much higher than MAE, it usually means the model made some large mistakes in certain periods.
+
+For example:
+
+| Situation | Interpretation |
+|---|---|
+| RMSE close to MAE | Forecast errors are relatively stable |
+| RMSE much higher than MAE | Some periods had very large errors |
+
+This is important because large forecast errors can create serious business problems.
+
+A single large under-forecast can cause stockouts and lost sales. A single large over-forecast can create excess inventory, markdowns, or working capital pressure.
+
+RMSE helps answer:
+
+> Did the model make any large errors that could create operational or financial risk?
+
+
+
