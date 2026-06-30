@@ -18,6 +18,17 @@ A sophisticated model can still produce poor forecasts, and relying on inaccurat
 
 This is why forecast validation is an essential step before using a model for real business decisions. Instead of assuming that the forecast is reliable because it looks reasonable, we need a structured way to test how the model would have performed in the past. **Backtesting** allows us to do exactly that: we simulate a real forecasting situation by training the model on one part of the historical data and then testing it on a later period that the model has not seen before.
 
+
+
+| 💡 **Definition: Backtesting**                                                                                                                                                                                                                                                                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Backtesting** is a method used to evaluate a forecasting model by testing it on past data as if it were predicting the future.
+
+The model is trained on an earlier period and then used to forecast a later period that has already happened. By comparing the forecast with the actual results, we can measure how reliable the model would have been in a real business situation.. |
+
+
+
+
 ## The Principle of Backtesting
 
 
