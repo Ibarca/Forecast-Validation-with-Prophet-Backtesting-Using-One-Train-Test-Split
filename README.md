@@ -16,6 +16,7 @@ A sophisticated model can still produce poor forecasts, and relying on inaccurat
        width="600">
 </p>
 
+This is why forecast validation is an essential step before using a model for real business decisions. Instead of assuming that the forecast is reliable because it looks reasonable, we need a structured way to test how the model would have performed in the past. **Backtesting** allows us to do exactly that: we simulate a real forecasting situation by training the model on one part of the historical data and then testing it on a later period that the model has not seen before.
 
 ## The Principle of Backtesting
 
