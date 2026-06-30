@@ -126,6 +126,10 @@ This is why forecast validation should look not only at how large the errors are
 
 **MAE** measures the average size of the forecast error in absolute terms. In simple words, it tells us how far the forecast was from the actual value on average.
 
+$$
+MAE = \frac{1}{n}\sum_{i=1}^{n}|A_i - F_i|
+$$
+
 For example, if MAE is **120 units**, it means that the forecast was wrong by around **120 units per period**, on average.
 
 <p align="center">
