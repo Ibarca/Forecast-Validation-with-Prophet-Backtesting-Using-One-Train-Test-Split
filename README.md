@@ -74,7 +74,7 @@ The diagram below shows the logic of the backtesting approach. The historical da
 
 <br>
 <p align="center">
-  <img src="Images/forecast_validation_process (1).png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_dfd.png"
        alt="Forecast validation process"
        width="680">
 </p>
