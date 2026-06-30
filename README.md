@@ -121,25 +121,34 @@ For example, a model that consistently overestimates demand may lead to excess i
 This is why forecast validation should look not only at how large the errors are, but also at the direction and consistency of those errors.
 
 ---
-
 ### MAE: Mean Absolute Error
 
-**MAE** measures the average size of the forecast error in absolute terms. In simple words, it tells us how far the forecast was from the actual value on average.
+**MAE** measures the average size of the forecast error in absolute terms.  
+In simple words, it tells us how far the forecast was from the actual value on average.
 
 $$
 MAE = \frac{1}{n}\sum_{i=1}^{n}|A_i - F_i|
 $$
 
+Where:
+
+- \(A_i\) = actual value  
+- \(F_i\) = forecasted value  
+- \(n\) = number of periods  
+
 For example, if MAE is **120 units**, it means that the forecast was wrong by around **120 units per period**, on average.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/mae_explainer.png"
-       alt="MAE"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/mae_explainer.png?raw=true"
+       alt="MAE explainer showing the average absolute difference between actual and forecasted values"
        width="680">
 </p>
 
-This metric is easy to interpret because it uses the same unit as the original data. 
-For example:
+<p align="center">
+  <em>Figure: MAE measures the average absolute distance between forecasted and actual values.</em>
+</p>
+
+MAE is easy to interpret because it uses the same unit as the original data.
 
 | MAE Result | Interpretation |
 |---|---|
@@ -150,16 +159,19 @@ In demand planning, MAE helps answer:
 
 > On average, how many units could my forecast be wrong by?
 
-However, MAE should always be interpreted together with the sales volume. An error of 100 units may be small for a product selling 10,000 units, but very large for a product selling 200 units.
+However, MAE should always be interpreted together with the sales volume. An error of **100 units** may be small for a product selling **10,000 units**, but very large for a product selling only **200 units**.
 
-
-
+One limitation of MAE is that it only measures the size of the error. It does not tell us whether the model tends to over-forecast or under-forecast. For that, we need to look at **Bias**.
 
 ---
 
 ### RMSE: Are there large forecast mistakes?
 
 **RMSE** also measures forecast error, but it reacts more strongly to large errors.
+
+$$
+RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(A_i - F_i)^2}
+$$
 
 If RMSE is much higher than MAE, it usually means the model made some large mistakes in certain periods.
 
