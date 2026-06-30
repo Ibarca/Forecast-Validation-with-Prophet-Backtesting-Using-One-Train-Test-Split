@@ -68,22 +68,33 @@ This simple train-test split is the foundation of the validation process. It hel
 
 ## How the Validation Process Works
 
-Once the historical dataset has been split into training data and validation data, the validation process becomes straightforward.
+Before going into the metrics, it is useful to visualize the full validation process.
 
-The **training data** is the part of the history the model is allowed to learn from. In this example, the model uses the first four years of sales data to identify patterns such as trend, seasonality, and recurring demand behavior.
+The diagram below shows the logic of the backtesting approach. The historical dataset is split chronologically into two parts: a training period and a validation period. The model learns only from the training data and then generates a forecast for the validation period, which represents the “future” from the model’s perspective.
+<br>
 
-The **validation data** is the part of the history that is kept aside. In this case, it is the final year of data. The model does not see this period during training. From the model’s perspective, this final year represents the future.
+<p align="center">
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_dfd.png"
+       alt="Forecast Validation Process"
+       width="600">
+</p>
+<p align="center">
+  <em>Figure: Forecast validation process using a chronological train-test split.</em>
+</p>
 
-After the Prophet model is fitted on the training data, it generates a forecast for the validation period. Because this period has already happened in reality, I can compare two values for each period:
+
+In this example, the first four years of sales data are used for training. This is the period where the Prophet model identifies patterns such as trend, seasonality, and recurring demand behavior.
+
+The final year is kept aside as validation data. The model does not see this period during training. After the model has been fitted, it is asked to forecast this final year.
+
+Because the validation period has already happened in reality, I can compare two values for each period:
 
 | Value | Meaning |
 |---|---|
 | Actual sales | What really happened |
 | Forecasted sales | What the model predicted |
 
-This comparison is the core of forecast validation.
-
-If the forecast is close to the actual sales, the model may be useful for business planning. If the forecast is consistently too high, too low, or very unstable, the model may need to be improved before it is used for decision-making.
+This comparison is the core of forecast validation. It allows me to calculate error metrics such as MAE, RMSE, MAPE, and Bias, and decide whether the forecast is reliable enough to support business decisions.
 
 To evaluate the difference between forecast and actual sales, I use several error metrics:
 
@@ -93,16 +104,7 @@ To evaluate the difference between forecast and actual sales, I use several erro
 - **Bias** to detect whether the model systematically over-forecasts or under-forecasts
 
 The goal is not only to generate a forecast, but to understand whether the forecast is accurate enough to support business decisions such as inventory planning, purchasing, service levels, and working capital management.
-
-<br>
-
-<p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_dfd.png"
-       alt="Forecast Validation Process"
-       width="600">
-</p>
-
-
+--
 
 
 
