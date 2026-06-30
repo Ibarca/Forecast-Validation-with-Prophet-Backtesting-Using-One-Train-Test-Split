@@ -53,7 +53,7 @@ In this example, the historical dataset is divided into two parts:
 
 The model is trained only on the first four years of data. The final year is kept aside and is not shown to the model during training.
 
-After the model has learned from the training period, it generates a forecast for the test period. Because the test period already happened in reality, I can compare the forecasted values with the actual sales values. This is called **train-test split**. It is a very practical technique that allows us to evaluate the model in a realistic way, according to the following logic:
+After the model has learned from the training period, it generates a forecast for the test period. Because the test period already happened in reality, I can compare the forecasted values with the actual sales values. This is a very practical technique that allows us to evaluate the model in a realistic way, according to the following logic:
 
 > If I had used this model one year ago, how close would its forecast have been to the actual demand?
 
