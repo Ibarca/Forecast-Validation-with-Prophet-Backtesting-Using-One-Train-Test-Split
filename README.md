@@ -122,11 +122,15 @@ This is why forecast validation should look not only at how large the errors are
 
 ### MAE: Mean Absolute Error
 
-**MAE** measures the average size of the forecast error in absolute terms.
-
-In simple words, it tells us how far the forecast was from the actual value on average.
+**MAE** measures the average size of the forecast error in absolute terms. In simple words, it tells us how far the forecast was from the actual value on average.
 
 For example, if MAE is **120 units**, it means that the forecast was wrong by around **120 units per period**, on average.
+
+<p align="center">
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_dfd.png](https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/mae_explainer.png"
+       alt="MAE"
+       width="680">
+</p>
 
 This metric is easy to interpret because it uses the same unit as the original data.
 
