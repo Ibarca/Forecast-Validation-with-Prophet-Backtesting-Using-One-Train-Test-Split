@@ -68,15 +68,33 @@ This simple train-test split is the foundation of the validation process. It hel
 
 ## How the Validation Process Works
 
-Instead of giving the model the full history, I split the data into two parts.
+Once the historical dataset has been split into training data and validation data, the validation process becomes straightforward.
 
-The first part is used as the **training period**. This is the data the model is allowed to learn from.
+The **training data** is the part of the history the model is allowed to learn from. In this example, the model uses the first four years of sales data to identify patterns such as trend, seasonality, and recurring demand behavior.
 
-The second part is kept aside as the **test period**. This period is not shown to the model during training. From the model’s perspective, this test period represents the future.
+The **validation data** is the part of the history that is kept aside. In this case, it is the final year of data. The model does not see this period during training. From the model’s perspective, this final year represents the future.
 
-The process works like this:
+After the Prophet model is fitted on the training data, it generates a forecast for the validation period. Because this period has already happened in reality, I can compare two values for each period:
 
+| Value | Meaning |
+|---|---|
+| Actual sales | What really happened |
+| Forecasted sales | What the model predicted |
 
+This comparison is the core of forecast validation.
+
+If the forecast is close to the actual sales, the model may be useful for business planning. If the forecast is consistently too high, too low, or very unstable, the model may need to be improved before it is used for decision-making.
+
+To evaluate the difference between forecast and actual sales, I use several error metrics:
+
+- **MAE** to understand the average forecast error
+- **RMSE** to penalize larger mistakes
+- **MAPE** to express the error as a percentage
+- **Bias** to detect whether the model systematically over-forecasts or under-forecasts
+
+The goal is not only to generate a forecast, but to understand whether the forecast is accurate enough to support business decisions such as inventory planning, purchasing, service levels, and working capital management.
+
+<br>
 
 <p align="center">
   <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_dfd.png"
