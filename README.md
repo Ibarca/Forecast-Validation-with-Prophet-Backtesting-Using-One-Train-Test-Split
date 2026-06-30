@@ -40,15 +40,24 @@ This is why forecast validation is an essential step before using a model for re
 <br>
 
 
-One of the easiest mistakes in forecasting is to train a model using all available historical data and then evaluate how well it fits that same data.
+To run the backtest, I used a simple **train-test split**.
 
-At first, this may look reasonable. The model follows the historical trend, captures some seasonality, and produces a forecast that seems to make sense.
+In time series forecasting, the data should not be split randomly. The order of time matters. A forecasting model should only learn from the past and then be tested on a later period that represents the future.
 
-But this can be misleading.
+In this example, the historical dataset is divided into two parts:
 
-A forecast is not valuable only because it explains what already happened. Its real value comes from its ability to predict periods the model has not seen before.
+| Period | Purpose |
+|---|---|
+| First 4 years | Training data |
+| Last 1 year | Test data |
 
-This is where backtesting and the train-test split become important.
+The model is trained only on the first four years of data. The final year is kept aside and is not shown to the model during training.
+
+After the model has learned from the training period, it generates a forecast for the test period. Because the test period already happened in reality, I can compare the forecasted values with the actual sales values. This allows me to evaluate the model in a realistic way:
+
+> If I had used this model one year ago, how close would its forecast have been to the actual demand?
+
+This simple train-test split is the foundation of the validation process. It helps move the forecast from something that only looks reasonable to something that can be measured and evaluated.
 
 | 💡 **Definition: Train-test split**                                                                                                                                                                                                                                                                                                                                                                                 |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
