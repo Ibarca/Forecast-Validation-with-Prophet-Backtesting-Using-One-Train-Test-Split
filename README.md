@@ -165,23 +165,36 @@ One limitation of MAE is that it only measures the size of the error. It does no
 
 ---
 
-### RMSE: Are there large forecast mistakes?
+### RMSE: Root Mean Squared Error
 
-**RMSE** also measures forecast error, but it reacts more strongly to large errors.
+**RMSE** measures forecast error like MAE, but it gives more weight to large mistakes.  
+This makes it especially useful when large forecast errors are more costly than small ones.
 
 $$
 RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(A_i - F_i)^2}
 $$
 
-If RMSE is much higher than MAE, it usually means the model made some large mistakes in certain periods.
+Where:
+
+- \(A_i\) = actual value  
+- \(F_i\) = forecasted value  
+- \(n\) = number of periods  
+
+Because the errors are squared before averaging, large mistakes have a stronger impact on RMSE than small ones.
+
+If RMSE is much higher than MAE, it usually means the model made some large errors in certain periods.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/rmse_vs_mae_scenarios.png"
-       alt="MAE"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/rmse_vs_mae_scenarios.png?raw=true"
+       alt="RMSE compared with MAE across different forecast error scenarios"
        width="680">
 </p>
 
-For example:
+<p align="center">
+  <em>Figure: RMSE increases more strongly than MAE when a forecast contains large errors.</em>
+</p>
+
+Like MAE, RMSE is expressed in the same unit as the original data.
 
 | Situation | Interpretation |
 |---|---|
@@ -190,12 +203,13 @@ For example:
 
 This is important because large forecast errors can create serious business problems.
 
-A single large under-forecast can cause stockouts and lost sales. A single large over-forecast can create excess inventory, markdowns, or working capital pressure.
+A single large under-forecast can lead to stockouts and lost sales. A single large over-forecast can create excess inventory, markdowns, and working capital pressure.
 
-RMSE helps answer:
+In demand planning, RMSE helps answer:
 
 > Did the model make any large errors that could create operational or financial risk?
 
+One limitation of RMSE is that it can be heavily influenced by a few extreme errors. For that reason, it is best interpreted together with MAE rather than on its own.
 ---
 
 ### MAPE: How large is the error in percentage terms?
