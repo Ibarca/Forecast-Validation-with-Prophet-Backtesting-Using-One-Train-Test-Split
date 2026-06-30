@@ -190,6 +190,15 @@ If MAPE is **15%**, it means that the forecast was wrong by around **15% on aver
 
 This makes MAPE useful when comparing different products, categories, or time periods.
 
+
+<p align="center">
+  <img src= 'https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/mape_chart_with_scale.png'
+       alt="MAPE"
+       width="680">
+</p>
+
+
+
 For example:
 
 | MAPE Result | Interpretation |
@@ -214,6 +223,15 @@ However, MAPE can be misleading when actual sales are very low or zero. In those
 **Bias** shows the direction of the forecast error.
 
 While MAE, RMSE, and MAPE tell us how large the error is, Bias tells us whether the model tends to over-forecast or under-forecast.
+
+
+
+<p align="center">
+  <img src= 'https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/bias_explainer.png'
+       alt="BIAS"
+       width="680">
+</p>
+
 
 | Bias Result | Interpretation | Business Risk |
 |---|---|---|
