@@ -10,69 +10,11 @@ A forecast is ultimately an estimate of future demand. The numbers may look reas
 
 A sophisticated model can still produce poor forecasts, and relying on inaccurate forecasts can lead to costly business decisions. This is especially important in demand planning, where forecast errors can affect inventory levels, purchasing decisions, service levels, and working capital.
 
-
-<svg width="680" height="500" viewBox="0 0 680 500" xmlns="http://www.w3.org/2000/svg" role="img">
-<title>Forecast risk chain</title>
-<desc>Diagram showing how one inaccurate demand forecast cascades into understocking or overstocking, then into financial impact, and finally into customer trust and competitive risk.</desc>
-<defs>
-<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-<path d="M2 1L8 5L2 9" fill="none" stroke="#444441" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</marker>
-</defs>
-
-<rect x="0" y="0" width="680" height="500" fill="#FFFFFF"/>
-
-<!-- Trigger node -->
-<rect x="250" y="20" width="180" height="44" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
-<text x="340" y="42" text-anchor="middle" dominant-baseline="central" font-family="Arial, sans-serif" font-size="14" font-weight="500" fill="#000000">Inaccurate forecast</text>
-
-<!-- Branch arrows -->
-<path d="M340 64 L340 84 L175 84 L175 100" fill="none" stroke="#444441" stroke-width="1.5" marker-end="url(#arrow)"/>
-<path d="M340 64 L340 84 L505 84 L505 100" fill="none" stroke="#444441" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-<!-- Understocking -->
-<rect x="40" y="100" width="270" height="56" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
-<text x="175" y="122" text-anchor="middle" dominant-baseline="central" font-family="Arial, sans-serif" font-size="14" font-weight="500" fill="#000000">Understocking</text>
-<text x="175" y="140" text-anchor="middle" dominant-baseline="central" font-family="Arial, sans-serif" font-size="12" fill="#000000">Demand underestimated</text>
-
-<!-- Overstocking -->
-<rect x="370" y="100" width="270" height="56" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
-<text x="505" y="122" text-anchor="middle" dominant-baseline="central" font-family="Arial, sans-serif" font-size="14" font-weight="500" fill="#000000">Overstocking</text>
-<text x="505" y="140" text-anchor="middle" dominant-baseline="central" font-family="Arial, sans-serif" font-size="12" fill="#000000">Demand overestimated</text>
-
-<!-- Down arrows -->
-<line x1="175" y1="156" x2="175" y2="196" stroke="#444441" stroke-width="1.5" marker-end="url(#arrow)"/>
-<line x1="505" y1="156" x2="505" y2="196" stroke="#444441" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-<!-- Lost sales -->
-<rect x="40" y="196" width="270" height="56" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
-<text x="175" y="218" text-anchor="middle" dominant-baseline="central" font-family="Arial, sans-serif" font-size="14" font-weight="500" fill="#000000">Lost sales</text>
-<text x="175" y="236" text-anchor="middle" dominant-baseline="central" font-family="Arial, sans-serif" font-size="12" fill="#000000">Stockout costs, expediting</text>
-
-<!-- Markdowns -->
-<rect x="370" y="196" width="270" height="56" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
-<text x="505" y="218" text-anchor="middle" dominant-baseline="central" font-family="Arial, sans-serif" font-size="14" font-weight="500" fill="#000000">Markdowns</text>
-<text x="505" y="236" text-anchor="middle" dominant-baseline="central" font-family="Arial, sans-serif" font-size="12" fill="#000000">Holding costs, write-offs</text>
-
-<!-- Converge arrows -->
-<path d="M175 252 L175 280 L340 280 L340 292" fill="none" stroke="#444441" stroke-width="1.5" marker-end="url(#arrow)"/>
-<path d="M505 252 L505 280 L340 280 L340 292" fill="none" stroke="#444441" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-<!-- Financial impact -->
-<rect x="190" y="292" width="300" height="56" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
-<text x="340" y="314" text-anchor="middle" dominant-baseline="central" font-family="Arial, sans-serif" font-size="14" font-weight="500" fill="#000000">Margin &amp; cash flow impact</text>
-<text x="340" y="332" text-anchor="middle" dominant-baseline="central" font-family="Arial, sans-serif" font-size="12" fill="#000000">Profitability and liquidity squeezed</text>
-
-<line x1="340" y1="348" x2="340" y2="388" stroke="#444441" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-<!-- Trust and strategic risk -->
-<rect x="170" y="388" width="340" height="56" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
-<text x="340" y="410" text-anchor="middle" dominant-baseline="central" font-family="Arial, sans-serif" font-size="14" font-weight="500" fill="#000000">Customer trust &amp; competitive risk</text>
-<text x="340" y="428" text-anchor="middle" dominant-baseline="central" font-family="Arial, sans-serif" font-size="12" fill="#000000">Churn, reputation, market share loss</text>
-
-</svg>
-
-
+<p align="center">
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_risk_chain.png"
+       alt="Forecast Validation Process"
+       width="600">
+</p>
 
 
 ## The Principle of Backtesting
