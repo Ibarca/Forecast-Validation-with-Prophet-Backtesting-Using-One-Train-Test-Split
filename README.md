@@ -61,7 +61,7 @@ This simple train-test split is the foundation of the validation process. It hel
 
 | 💡 **Definition: Train-test split**                                                                                                                                                                                                                                                                                                                                                                                 |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A **train-test split** is a validation technique used in machine learning where the available data is divided into two parts: a **training set** and a **test set**.<br><br>• The **training set** is used to teach the model and allow it to learn patterns from historical data.<br><br>• The **test set** is kept separate and used only to evaluate how well the model performs on data it has not seen before. |
+| A **train-test split** is a validation technique used in machine learning where the available data is divided into two parts: a **training set** and a **test set**.<br><br> |
 
 
 
