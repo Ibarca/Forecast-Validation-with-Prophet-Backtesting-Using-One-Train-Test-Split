@@ -210,58 +210,86 @@ In demand planning, RMSE helps answer:
 > Did the model make any large errors that could create operational or financial risk?
 
 One limitation of RMSE is that it can be heavily influenced by a few extreme errors. For that reason, it is best interpreted together with MAE rather than on its own.
+
+
 ---
 
-### MAPE: How large is the error in percentage terms?
+### MAPE: Mean Absolute Percentage Error
 
-**MAPE** expresses the forecast error as a percentage of actual demand.
+**MAPE** expresses the forecast error as a percentage of actual demand.  
+This makes it useful when comparing forecast accuracy across different products, categories, or time periods.
 
-If MAPE is **15%**, it means that the forecast was wrong by around **15% on average**.
+$$
+MAPE = \frac{1}{n}\sum_{i=1}^{n}\left|\frac{A_i - F_i}{A_i}\right| \times 100\%
+$$
 
-This makes MAPE useful when comparing different products, categories, or time periods.
+Where:
 
+- \(A_i\) = actual value  
+- \(F_i\) = forecasted value  
+- \(n\) = number of periods  
+
+If MAPE is **15%**, it means that the forecast was wrong by around **15% on average** compared with actual demand.
 
 <p align="center">
-  <img src= 'https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/mape_chart_with_scale.png'
-       alt="MAPE"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/mape_chart_with_scale.png?raw=true"
+       alt="MAPE interpretation scale for forecast accuracy"
        width="680">
 </p>
 
+<p align="center">
+  <em>Figure: MAPE expresses forecast error as a percentage, making it easier to compare accuracy across products or periods.</em>
+</p>
 
+As a practical guideline, MAPE can often be interpreted as follows:
 
-For example:
+| MAPE Result | General Interpretation |
+|---:|---|
+| Below 10% | Very strong forecast |
+| 10–20% | Good or reasonable forecast |
+| 20–30% | Acceptable, depending on the business context |
+| 30–50% | Forecast needs attention |
+| Above 50% | Forecast may be unreliable |
 
-| MAPE Result | Interpretation |
-|---|---|
-| 5% | Very accurate forecast |
-| 10–20% | Reasonable forecast, depending on the business |
-| 20–50% | Forecast needs attention |
-| 50%+ | Forecast may be unreliable |
+These ranges are not universal. A good MAPE depends on demand volatility, product category, seasonality, promotions, stock availability, and data quality.
 
-These ranges are not universal. A good MAPE depends on the volatility of demand, the product category, seasonality, promotions, and data quality.
+In demand planning, MAPE helps answer:
 
-MAPE helps answer:
+> How large is the forecast error compared with actual demand?
 
-> How large is the forecast error compared with the actual demand?
+However, MAPE should be interpreted carefully when actual sales are very low. In those cases, even a small absolute error can create a very high percentage error. If actual demand is zero, MAPE cannot be calculated because the formula divides by the actual value.
 
-However, MAPE can be misleading when actual sales are very low or zero. In those cases, even a small absolute error can create a very high percentage error.
+For this reason, MAPE is useful for business interpretation, but it should not be used alone. It is best read together with MAE, RMSE, and Bias.
+
 
 ---
 
-### Bias: Is the model systematically too high or too low?
+### Bias: Forecast Direction
 
-**Bias** shows the direction of the forecast error.
-
+**Bias** shows the direction of the forecast error.  
 While MAE, RMSE, and MAPE tell us how large the error is, Bias tells us whether the model tends to over-forecast or under-forecast.
 
+$$
+Bias = \frac{1}{n}\sum_{i=1}^{n}(F_i - A_i)
+$$
 
+Where:
+
+- \(F_i\) = forecasted value  
+- \(A_i\) = actual value  
+- \(n\) = number of periods  
+
+With this formula, a **positive Bias** means the forecast is too high on average, while a **negative Bias** means the forecast is too low on average.
 
 <p align="center">
-  <img src= 'https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/bias_explainer.png'
-       alt="BIAS"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/bias_explainer.png?raw=true"
+       alt="Bias explainer showing over-forecasting, under-forecasting, and balanced forecast errors"
        width="680">
 </p>
 
+<p align="center">
+  <em>Figure: Bias shows whether the forecast is systematically too high or too low.</em>
+</p>
 
 | Bias Result | Interpretation | Business Risk |
 |---|---|---|
@@ -269,11 +297,12 @@ While MAE, RMSE, and MAPE tell us how large the error is, Bias tells us whether 
 | Positive Bias | Forecast is too high on average | Overstock, markdowns, excess working capital |
 | Negative Bias | Forecast is too low on average | Stockouts, lost sales, lower service level |
 
-Bias is especially important in demand planning because two forecasts can have the same error level but very different consequences.
+Bias is especially important in demand planning because two forecasts can have a similar average error but create very different business consequences.
 
-A forecast that is always too high may look acceptable from an accuracy perspective, but it can still create excess inventory. A forecast that is always too low may reduce inventory costs in the short term, but it can damage availability and customer satisfaction.
+A forecast that is consistently too high may lead to excess inventory, higher storage costs, markdowns, and working capital pressure. A forecast that is consistently too low may reduce inventory in the short term, but it can damage availability, service levels, and customer satisfaction.
 
-Bias helps answer:
+In demand planning, Bias helps answer:
 
 > Is the model making random errors, or is it systematically wrong in one direction?
 
+One limitation of Bias is that positive and negative errors can cancel each other out. For example, a model may over-forecast in some periods and under-forecast in others, resulting in a Bias close to zero. This is why Bias should always be interpreted together with MAE, RMSE, and MAPE.
