@@ -79,7 +79,7 @@ The process works like this:
 
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_process%20(1).png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_dfd.png"
        alt="Forecast Validation Process"
        width="600">
 </p>
