@@ -120,4 +120,15 @@ For example, a model that consistently overestimates demand may lead to excess i
 
 This is why forecast validation should look not only at how large the errors are, but also at the direction and consistency of those errors.
 
-Then after this section, you can create one subsection per metric:
+### MAE: Mean Absolute Error
+
+**MAE** measures the average size of the forecast error in absolute terms.
+
+In simple words, it tells us how far the forecast was from the actual value on average.
+
+For example, if MAE is **120 units**, it means that the forecast was wrong by around **120 units per period**, on average.
+
+This metric is easy to interpret because it uses the same unit as the original data.
+
+```text
+MAE = average absolute difference between actual sales and forecasted sales
