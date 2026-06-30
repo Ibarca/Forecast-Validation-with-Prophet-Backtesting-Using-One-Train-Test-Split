@@ -157,6 +157,12 @@ However, MAE should always be interpreted together with the sales volume. An err
 
 If RMSE is much higher than MAE, it usually means the model made some large mistakes in certain periods.
 
+<p align="center">
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/rmse_vs_mae_scenarios.png"
+       alt="MAE"
+       width="680">
+</p>
+
 For example:
 
 | Situation | Interpretation |
