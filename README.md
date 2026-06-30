@@ -71,17 +71,18 @@ This simple train-test split is the foundation of the validation process. It hel
 Before going into the metrics, it is useful to visualize the full validation process.
 
 The diagram below shows the logic of the backtesting approach. The historical dataset is split chronologically into two parts: a training period and a validation period. The model learns only from the training data and then generates a forecast for the validation period, which represents the “future” from the model’s perspective.
+
 <br>
 
 <p align="center">
   <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_dfd.png"
        alt="Forecast Validation Process"
        width="600">
-</p>
-<p align="center">
+
+ align="center">
   <em>Figure: Forecast validation process using a chronological train-test split.</em>
 </p>
-
+<br>
 
 In this example, the first four years of sales data are used for training. This is the period where the Prophet model identifies patterns such as trend, seasonality, and recurring demand behavior.
 
