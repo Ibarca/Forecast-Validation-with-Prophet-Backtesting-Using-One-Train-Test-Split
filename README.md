@@ -103,6 +103,17 @@ This comparison is the core of forecast validation. It allows me to calculate er
 
 Once the forecasted values are compared with the actual sales, the next step is to measure the size and direction of the error.
 
+
+<p align="center">
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_overview.png?raw=true"
+       alt="Forecast validation overview showing the process from train-test split to forecast comparison, metric calculation, and business interpretation"
+       width="680">
+</p>
+
+<p align="center">
+  <em>Figure: Forecast validation overview, from historical data split to metric interpretation.</em>
+</p>
+
 A forecast will almost never be perfectly correct. Some difference between forecast and actual demand is normal. The important question is whether the error is small enough, stable enough, and unbiased enough to support business decisions.
 
 For this validation, I use four metrics:
