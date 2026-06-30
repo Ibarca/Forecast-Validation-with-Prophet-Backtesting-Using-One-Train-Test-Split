@@ -127,7 +127,7 @@ This is why forecast validation should look not only at how large the errors are
 For example, if MAE is **120 units**, it means that the forecast was wrong by around **120 units per period**, on average.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_dfd.png](https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/mae_explainer.png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/mae_explainer.png"
        alt="MAE"
        width="680">
 </p>
