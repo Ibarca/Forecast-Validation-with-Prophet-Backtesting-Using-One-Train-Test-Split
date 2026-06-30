@@ -180,5 +180,52 @@ RMSE helps answer:
 
 > Did the model make any large errors that could create operational or financial risk?
 
+---
 
+### MAPE: How large is the error in percentage terms?
+
+**MAPE** expresses the forecast error as a percentage of actual demand.
+
+If MAPE is **15%**, it means that the forecast was wrong by around **15% on average**.
+
+This makes MAPE useful when comparing different products, categories, or time periods.
+
+For example:
+
+| MAPE Result | Interpretation |
+|---|---|
+| 5% | Very accurate forecast |
+| 10–20% | Reasonable forecast, depending on the business |
+| 20–50% | Forecast needs attention |
+| 50%+ | Forecast may be unreliable |
+
+These ranges are not universal. A good MAPE depends on the volatility of demand, the product category, seasonality, promotions, and data quality.
+
+MAPE helps answer:
+
+> How large is the forecast error compared with the actual demand?
+
+However, MAPE can be misleading when actual sales are very low or zero. In those cases, even a small absolute error can create a very high percentage error.
+
+---
+
+### Bias: Is the model systematically too high or too low?
+
+**Bias** shows the direction of the forecast error.
+
+While MAE, RMSE, and MAPE tell us how large the error is, Bias tells us whether the model tends to over-forecast or under-forecast.
+
+| Bias Result | Interpretation | Business Risk |
+|---|---|---|
+| Bias close to 0 | Forecast is balanced | No strong systematic direction |
+| Positive Bias | Forecast is too high on average | Overstock, markdowns, excess working capital |
+| Negative Bias | Forecast is too low on average | Stockouts, lost sales, lower service level |
+
+Bias is especially important in demand planning because two forecasts can have the same error level but very different consequences.
+
+A forecast that is always too high may look acceptable from an accuracy perspective, but it can still create excess inventory. A forecast that is always too low may reduce inventory costs in the short term, but it can damage availability and customer satisfaction.
+
+Bias helps answer:
+
+> Is the model making random errors, or is it systematically wrong in one direction?
 
