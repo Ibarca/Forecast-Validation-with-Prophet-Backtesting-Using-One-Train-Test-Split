@@ -346,7 +346,7 @@ https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/
 <p align="center">
   <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/Image%2001.07.26%20at%2010.16.jpeg"
        alt="Forecasting continuous improvement"
-       width="680">
+       width="550">
 </p>
 
 <p align="center">
