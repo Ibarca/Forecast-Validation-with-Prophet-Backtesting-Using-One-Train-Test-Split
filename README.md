@@ -60,7 +60,7 @@ In this example, the historical dataset is divided into two parts:
 > In forecasting, the train-test split should respect the time order of the data. The model is trained on the earlier historical period and tested on the most recent period, which simulates a real future forecast.
 >
 > A common practical approach is to use around **70–80% of the data for training** and **20–30% for validation**. The exact split depends on the amount of historical data available and the forecasting horizon.
-The model is trained only on the first four years of data. The final year is kept aside and is not shown to the model during training.
+In this example, the model is trained only on the first four years of data. The final year is kept aside and is not shown to the model during training.
 
 After the model has learned from the training period, it generates a forecast for the validation period. Because this period already happened in reality, I can compare the forecasted values with the actual sales values.
 
