@@ -104,7 +104,7 @@ This comparison is the core of forecast validation. It allows me to calculate er
 Once the forecasted values are compared with the actual sales, the next step is to measure the size and direction of the error.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_overview.png?raw=true"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_dfd.png"
        alt="Forecast validation overview showing the process from train-test split to forecast comparison, metric calculation, and business interpretation"
        width="680">
 </p>
