@@ -317,3 +317,37 @@ In demand planning, Bias helps answer:
 > Is the model making random errors, or is it systematically wrong in one direction?
 
 One limitation of Bias is that positive and negative errors can cancel each other out. For example, a model may over-forecast in some periods and under-forecast in others, resulting in a Bias close to zero. This is why Bias should always be interpreted together with MAE, RMSE, and MAPE.
+
+
+## What If the Forecast Validation Is Not Successful?
+
+Sometimes the validation results show that the forecast is not reliable enough. This does not mean the process failed. In fact, this is exactly why backtesting is useful: it helps identify problems before the forecast is used for real business decisions.
+
+If the error metrics are too high, or if the model shows a strong positive or negative Bias, the next step is to understand why the forecast is not performing well.
+
+| Area to Check | Why It Matters |
+|---|---|
+| Data quality | Missing values, wrong dates, outliers, or stockout periods can distort the model |
+| Seasonality | The model may not fully capture monthly, weekly, or yearly demand patterns |
+| Trend changes | Demand may have shifted due to assortment changes, pricing, or market conditions |
+| Promotions or campaigns | Marketing activity can create demand spikes that the model does not understand |
+| External factors | Weather, holidays, availability, or economic effects may influence demand |
+| Product behavior | Some SKUs are too volatile or irregular to forecast accurately with a simple model |
+
+After identifying the likely cause, the model can be improved. For example, I could clean the historical data, remove or flag outliers, add relevant regressors such as holidays or promotions, adjust Prophet’s seasonality settings, or test a different forecasting approach.
+
+In some cases, the conclusion may also be that the product is simply difficult to forecast. For example, low-volume or highly irregular SKUs often produce unstable accuracy metrics. In that case, it may be better to evaluate the forecast at a category level, use simpler planning rules, or combine statistical forecasting with business input.
+
+The goal of validation is not only to approve or reject a forecast. The real goal is to create a feedback loop:
+
+```text
+Validate forecast
+        ↓
+Identify errors
+        ↓
+Understand the cause
+        ↓
+Improve data or model
+        ↓
+Validate again
+
