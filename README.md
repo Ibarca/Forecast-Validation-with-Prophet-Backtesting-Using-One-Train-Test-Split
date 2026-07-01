@@ -371,7 +371,6 @@ A forecast that performs poorly in validation should not be used blindly for inv
 
 ---
 
-## Running the Train-Test Split in Python
 
 ## Running the Train-Test Split in Python
 
@@ -420,7 +419,12 @@ df = df.rename(columns={
 
 ### Creating the Train-Test Split
 
-For this validation, I use the last 12 periods as the validation data. The model is trained on the earlier historical data and then tested on the final year.
+
+For this validation, I use the last **12 periods** as the validation data. Since the dataset is structured at a monthly level, this means that the final 12 months are kept aside and used as the test period.
+
+The model is trained only on the earlier historical data. After that, it generates a forecast for the final year, which is then compared against the actual sales values from the validation period.
+
+This allows me to simulate a realistic forecasting scenario: the model learns from the past and is then evaluated on a period it has not seen before.
 
 ```python
 # Number of periods to keep for validation
@@ -437,7 +441,12 @@ print("Validation period:")
 print(test["ds"].min(), "to", test["ds"].max())
 ```
 
-This split is important because time series data should not be split randomly. The model should only learn from the past and then be tested on a later period that represents the future.
+In this code, `validation_periods = 12` defines how many observations are reserved for validation. The training dataset contains all rows except the final 12 periods, while the test dataset contains only those final 12 periods.
+
+The use of `.iloc` allows the split to be based on the position of the rows in the dataset. This is useful because the data is already ordered chronologically, from the oldest period to the most recent period.
+
+This split is important because time series data should not be split randomly. In a forecasting problem, the model should only learn from historical information that would have been available at the time of prediction. The validation period therefore acts as a simulated future, allowing us to evaluate how well the model would have performed in a real business situation.
+
 
 ---
 
@@ -457,7 +466,7 @@ The validation period is not used during training. This allows me to test whethe
 
 ### Forecasting the Validation Period
 
-Next, I ask the model to generate predictions for the same dates that exist in the validation dataset.
+Next, I ask the model to generate predictions for the same dates that exist in the validation dataset. This is exactly the same process as in [Building My First Sales Forecast in Python with Prophet](https://github.com/Ibarca/Building-My-First-Sales-Forecast-in-Python-with-Prophet/blob/main/README.md) .
 
 ```python
 future = test[["ds"]]
@@ -477,6 +486,9 @@ Prophet returns several columns, but for validation I mainly need:
 ```python
 forecast_validation = forecast[["ds", "yhat", "yhat_lower", "yhat_upper"]]
 ```
+
+> [!NOTE]
+> For the forecast accuracy evaluation, I only use the main forecast value, `yhat`, and compare it against the actual sales value, `y`. Prophet also returns `yhat_lower` and `yhat_upper`, which represent the uncertainty interval around the forecast. These values are useful for visualizing the possible range of future demand, but they are not used directly to calculate standard accuracy metrics such as MAE, RMSE, MAPE, or Bias.
 
 Then I combine the forecast with the actual sales from the validation period.
 
