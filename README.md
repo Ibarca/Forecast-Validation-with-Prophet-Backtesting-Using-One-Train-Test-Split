@@ -350,3 +350,207 @@ The goal of validation is not only to approve or reject a forecast. The real goa
 <p align="center">
   <em>Figure: Forecasting continuous improvement.</em>
 </p>
+
+
+## Running the Train-Test Split in Python
+
+After defining the validation process conceptually, the next step is to implement it in Python.
+
+In my notebook, the dataset is prepared in the format required by Prophet:
+
+| Column | Meaning |
+|---|---|
+| `ds` | Date column |
+| `y` | Sales or demand value |
+
+Before splitting the data, I make sure the date column is correctly formatted and the dataset is sorted chronologically.
+
+```python
+import pandas as pd
+import numpy as np
+from prophet import Prophet
+
+# Make sure the date column is in datetime format
+df["ds"] = pd.to_datetime(df["ds"])
+
+# Sort data chronologically
+df = df.sort_values("ds").reset_index(drop=True)
+```
+
+If the original dataset still uses different column names, I first rename them:
+
+```python
+df = df.rename(columns={
+    "Month": "ds",
+    "Sales": "y"
+})
+```
+
+## Creating the Train-Test Split
+
+For this validation, I use the last 12 periods as the validation data.  
+The model is trained on the earlier historical data and then tested on the final year.
+
+```python
+# Number of periods to keep for validation
+validation_periods = 12
+
+# Split the dataset
+train = df.iloc[:-validation_periods].copy()
+test = df.iloc[-validation_periods:].copy()
+
+print("Training period:")
+print(train["ds"].min(), "to", train["ds"].max())
+
+print("Validation period:")
+print(test["ds"].min(), "to", test["ds"].max())
+```
+
+This split is important because time series data should not be split randomly.  
+The model should only learn from the past and then be tested on a later period that represents the future.
+
+## Training the Prophet Model
+
+Once the data is split, I train the Prophet model only on the training data.
+
+```python
+model = Prophet()
+
+model.fit(train)
+```
+
+The validation period is not used during training.  
+This allows me to test whether the model can forecast data it has not seen before.
+
+## Forecasting the Validation Period
+
+Next, I ask the model to generate predictions for the same dates that exist in the validation dataset.
+
+```python
+future = test[["ds"]]
+
+forecast = model.predict(future)
+```
+
+Prophet returns several columns, but for validation I mainly need:
+
+| Column | Meaning |
+|---|---|
+| `ds` | Forecast date |
+| `yhat` | Forecasted value |
+| `yhat_lower` | Lower forecast interval |
+| `yhat_upper` | Upper forecast interval |
+
+```python
+forecast_validation = forecast[["ds", "yhat", "yhat_lower", "yhat_upper"]]
+```
+
+Then I combine the forecast with the actual sales from the validation period.
+
+```python
+validation_results = test.merge(
+    forecast_validation,
+    on="ds",
+    how="left"
+)
+
+validation_results.head()
+```
+
+The resulting table contains both the actual sales and the forecasted sales:
+
+| Column | Meaning |
+|---|---|
+| `ds` | Date |
+| `y` | Actual sales |
+| `yhat` | Forecasted sales |
+| `yhat_lower` | Lower forecast interval |
+| `yhat_upper` | Upper forecast interval |
+
+This table is the basis for calculating the forecast accuracy metrics.
+
+## Calculating Forecast Accuracy Metrics
+
+After comparing actual sales with forecasted sales, I calculate the main validation KPIs: **MAE, RMSE, MAPE, and Bias**.
+
+```python
+actual = validation_results["y"]
+forecasted = validation_results["yhat"]
+
+# MAE: Mean Absolute Error
+mae = np.mean(np.abs(actual - forecasted))
+
+# RMSE: Root Mean Squared Error
+rmse = np.sqrt(np.mean((actual - forecasted) ** 2))
+
+# MAPE: Mean Absolute Percentage Error
+# Avoid division by zero
+mask = actual != 0
+mape = np.mean(np.abs((actual[mask] - forecasted[mask]) / actual[mask])) * 100
+
+# Bias: Average forecast direction
+bias = np.mean(forecasted - actual)
+
+# Bias percentage
+bias_pct = (np.sum(forecasted - actual) / np.sum(actual)) * 100
+```
+
+Then I summarize the results in a simple table.
+
+```python
+metrics = pd.DataFrame({
+    "Metric": ["MAE", "RMSE", "MAPE", "Bias", "Bias %"],
+    "Value": [mae, rmse, mape, bias, bias_pct]
+})
+
+metrics
+```
+
+## Interpreting the Results
+
+Each metric answers a different question:
+
+| Metric | Question it answers |
+|---|---|
+| MAE | How many units was the forecast wrong by on average? |
+| RMSE | Did the model make large errors in some periods? |
+| MAPE | How large was the error compared with actual demand? |
+| Bias | Does the model systematically over-forecast or under-forecast? |
+
+The direction of Bias is especially important:
+
+```python
+if bias > 0:
+    print("The model tends to over-forecast.")
+elif bias < 0:
+    print("The model tends to under-forecast.")
+else:
+    print("The forecast is balanced on average.")
+```
+
+A positive Bias means the forecast is too high on average.  
+A negative Bias means the forecast is too low on average.
+
+## Visualizing Forecast vs Actual Sales
+
+Finally, I plot the actual sales against the forecasted values to visually inspect the model performance.
+
+```python
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10, 5))
+
+plt.plot(train["ds"], train["y"], label="Training data")
+plt.plot(test["ds"], test["y"], label="Actual sales")
+plt.plot(validation_results["ds"], validation_results["yhat"], label="Forecast")
+
+plt.title("Forecast Validation: Actual Sales vs Forecast")
+plt.xlabel("Date")
+plt.ylabel("Sales")
+plt.legend()
+plt.show()
+```
+
+The visual comparison helps identify whether the model follows the overall trend, misses seasonal peaks, or creates systematic over-forecasting or under-forecasting.
+
+The metrics quantify the forecast error, but the chart helps explain where and why those errors happen.
