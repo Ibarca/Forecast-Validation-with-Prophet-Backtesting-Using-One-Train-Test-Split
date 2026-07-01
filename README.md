@@ -4,41 +4,43 @@ In my previous article, I showed how to build a sales forecast using Prophet. At
 
 But there is an important question that comes before we use those predictions to make decisions:
 
-Can we trust them?
+> Can we trust them?
 
 A forecast is ultimately an estimate of future demand. The numbers may look reasonable, but without evaluating the model’s performance, we have no way of knowing whether those predictions are actually useful.
 
 A sophisticated model can still produce poor forecasts, and relying on inaccurate forecasts can lead to costly business decisions. This is especially important in demand planning, where forecast errors can affect inventory levels, purchasing decisions, service levels, and working capital.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_risk_chain%20(1).png"
-       alt="Forecast Validation Process"
-       width="600">
+  <img src="Images/forecast_risk_chain.png"
+       alt="Forecast risk chain showing how inaccurate forecasts can lead to understocking, overstocking, lost sales, markdowns, cash-flow impact, and customer trust risk"
+       width="680">
 </p>
 
-This is why forecast validation is an essential step before using a model for real business decisions. Instead of assuming that the forecast is reliable because it looks reasonable, we need a structured way to test how the model would have performed in the past. **Backtesting** allows us to do exactly that: we simulate a real forecasting situation by training the model on one part of the historical data and then testing it on a later period that the model has not seen before.
+<p align="center">
+  <em>Figure: How an inaccurate forecast can create operational, financial, and customer-related risks.</em>
+</p>
 
+This is why forecast validation is an essential step before using a model for real business decisions. Instead of assuming that the forecast is reliable because it looks reasonable, we need a structured way to test how the model would have performed in the past.
 
+**Backtesting** allows us to do exactly that: we simulate a real forecasting situation by training the model on one part of the historical data and then testing it on a later period that the model has not seen before.
 
+---
 
 ## The Principle of Backtesting
 
+**Backtesting** is a method used to evaluate a forecasting model by testing it on past data as if it were predicting the future.
 
-
-
-**Backtesting** is a method used to evaluate a forecasting model by testing it on past data as if it were predicting the future. The model is trained on an earlier period and then used to forecast a later period that has already happened. By comparing the forecast with the actual results, we can measure how reliable the model would have been in a real business situation
-
-
+The model is trained on an earlier period and then used to forecast a later period that has already happened. By comparing the forecast with the actual results, we can measure how reliable the model would have been in a real business situation.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/prophet_5yr_split_with_full_dataset%20(1).png"
-       alt="Forecast Validation Process"
-       width="600">
+  <img src="Images/train_test_split.png"
+       alt="Train-test split for forecast validation"
+       width="680">
 </p>
 
-
-<br>
-
+<p align="center">
+  <em>Figure: Example of a chronological train-test split for forecast validation.</em>
+</p>
 
 To run the backtest, I used a simple **train-test split**.
 
@@ -49,22 +51,22 @@ In this example, the historical dataset is divided into two parts:
 | Period | Purpose |
 |---|---|
 | First 4 years | Training data |
-| Last 1 year | Test data |
+| Last 1 year | Validation data |
 
 The model is trained only on the first four years of data. The final year is kept aside and is not shown to the model during training.
 
-After the model has learned from the training period, it generates a forecast for the test period. Because the test period already happened in reality, I can compare the forecasted values with the actual sales values. This is a very practical technique that allows us to evaluate the model in a realistic way, according to the following logic:
+After the model has learned from the training period, it generates a forecast for the validation period. Because this period already happened in reality, I can compare the forecasted values with the actual sales values.
+
+This is a very practical technique that allows us to evaluate the model in a realistic way:
 
 > If I had used this model one year ago, how close would its forecast have been to the actual demand?
 
 This simple train-test split is the foundation of the validation process. It helps move the forecast from something that only looks reasonable to something that can be measured and evaluated.
 
-| 💡 **Definition: Train-test split**                                                                                                                                                                                                                                                                                                                                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A **train-test split** is a validation technique used in machine learning where the available data is divided into two parts: a **training set** and a **test set**.<br><br> |
+> [!NOTE]
+> A **train-test split** is a validation technique where the available data is divided into two parts: a **training set** used to fit the model and a **test or validation set** used to evaluate how well the model performs on unseen data.
 
-
-
+---
 
 ## How the Validation Process Works
 
@@ -72,19 +74,15 @@ Before going into the metrics, it is useful to visualize the full validation pro
 
 The diagram below shows the logic of the backtesting approach. The historical dataset is split chronologically into two parts: a training period and a validation period. The model learns only from the training data and then generates a forecast for the validation period, which represents the “future” from the model’s perspective.
 
-<br>
-
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_dfd.png"
-       alt="Forecast validation process"
+  <img src="Images/forecast_validation_process%20(1).png"
+       alt="Forecast validation process using a chronological train-test split"
        width="680">
 </p>
 
 <p align="center">
   <em>Figure: Forecast validation process using a chronological train-test split.</em>
 </p>
-
-<br>
 
 In this example, the first four years of sales data are used for training. This is the period where the Prophet model identifies patterns such as trend, seasonality, and recurring demand behavior.
 
@@ -97,15 +95,16 @@ Because the validation period has already happened in reality, I can compare two
 | Actual sales | What really happened |
 | Forecasted sales | What the model predicted |
 
-This comparison is the core of forecast validation. It allows me to calculate error metrics such as MAE, RMSE, MAPE, and Bias, and decide whether the forecast is reliable enough to support business decisions.
+This comparison is the core of forecast validation. It allows me to calculate error metrics such as **MAE**, **RMSE**, **MAPE**, and **Bias**, and decide whether the forecast is reliable enough to support business decisions.
+
+---
 
 ## Measuring Forecast Accuracy
 
 Once the forecasted values are compared with the actual sales, the next step is to measure the size and direction of the error.
 
-
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_overview.png?raw=true"
+  <img src="Images/forecast_validation_overview.png"
        alt="Forecast validation overview showing the process from train-test split to forecast comparison, metric calculation, and business interpretation"
        width="680">
 </p>
@@ -125,13 +124,16 @@ For this validation, I use four metrics:
 | MAPE | Error as a percentage | Useful to compare accuracy across products or periods |
 | Bias | Direction of the error | Shows whether the model tends to over-forecast or under-forecast |
 
-Each metric answers a slightly different question. For that reason, I do not rely on only one number to judge the model. A forecast can have a reasonable average error but still be systematically too high or too low. In demand planning, this distinction matters because over-forecasting and under-forecasting create different business risks.
+Each metric answers a slightly different question. For that reason, I do not rely on only one number to judge the model.
+
+A forecast can have a reasonable average error but still be systematically too high or too low. In demand planning, this distinction matters because over-forecasting and under-forecasting create different business risks.
 
 For example, a model that consistently overestimates demand may lead to excess inventory, markdowns, and higher working capital. A model that consistently underestimates demand may lead to stockouts, lost sales, and lower service levels.
 
 This is why forecast validation should look not only at how large the errors are, but also at the direction and consistency of those errors.
 
 ---
+
 ### MAE: Mean Absolute Error
 
 **MAE** measures the average size of the forecast error in absolute terms.  
@@ -143,14 +145,14 @@ $$
 
 Where:
 
-- \(A_i\) = actual value  
-- \(F_i\) = forecasted value  
-- \(n\) = number of periods  
+- \(A_i\) = actual value
+- \(F_i\) = forecasted value
+- \(n\) = number of periods
 
 For example, if MAE is **120 units**, it means that the forecast was wrong by around **120 units per period**, on average.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/mae_explainer.png?raw=true"
+  <img src="Images/mae_explainer.png"
        alt="MAE explainer showing the average absolute difference between actual and forecasted values"
        width="680">
 </p>
@@ -187,16 +189,16 @@ $$
 
 Where:
 
-- \(A_i\) = actual value  
-- \(F_i\) = forecasted value  
-- \(n\) = number of periods  
+- \(A_i\) = actual value
+- \(F_i\) = forecasted value
+- \(n\) = number of periods
 
 Because the errors are squared before averaging, large mistakes have a stronger impact on RMSE than small ones.
 
 If RMSE is much higher than MAE, it usually means the model made some large errors in certain periods.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/rmse_vs_mae_scenarios.png?raw=true"
+  <img src="Images/rmse_vs_mae_scenarios.png"
        alt="RMSE compared with MAE across different forecast error scenarios"
        width="680">
 </p>
@@ -222,7 +224,6 @@ In demand planning, RMSE helps answer:
 
 One limitation of RMSE is that it can be heavily influenced by a few extreme errors. For that reason, it is best interpreted together with MAE rather than on its own.
 
-
 ---
 
 ### MAPE: Mean Absolute Percentage Error
@@ -236,14 +237,14 @@ $$
 
 Where:
 
-- \(A_i\) = actual value  
-- \(F_i\) = forecasted value  
-- \(n\) = number of periods  
+- \(A_i\) = actual value
+- \(F_i\) = forecasted value
+- \(n\) = number of periods
 
 If MAPE is **15%**, it means that the forecast was wrong by around **15% on average** compared with actual demand.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/mape_chart_with_scale.png?raw=true"
+  <img src="Images/mape_chart_with_scale.png"
        alt="MAPE interpretation scale for forecast accuracy"
        width="680">
 </p>
@@ -268,10 +269,9 @@ In demand planning, MAPE helps answer:
 
 > How large is the forecast error compared with actual demand?
 
-However, MAPE should be interpreted carefully when actual sales are very low. In those cases, even a small absolute error can create a very high percentage error. If actual demand is zero, MAPE cannot be calculated because the formula divides by the actual value.
+However, MAPE should be interpreted carefully when actual sales are very low. In those cases, even a small absolute error can create a very high percentage error. If actual demand is zero, MAPE becomes problematic because the formula divides by the actual value.
 
 For this reason, MAPE is useful for business interpretation, but it should not be used alone. It is best read together with MAE, RMSE, and Bias.
-
 
 ---
 
@@ -286,14 +286,14 @@ $$
 
 Where:
 
-- \(F_i\) = forecasted value  
-- \(A_i\) = actual value  
-- \(n\) = number of periods  
+- \(F_i\) = forecasted value
+- \(A_i\) = actual value
+- \(n\) = number of periods
 
 With this formula, a **positive Bias** means the forecast is too high on average, while a **negative Bias** means the forecast is too low on average.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/bias_explainer.png?raw=true"
+  <img src="Images/bias_explainer.png"
        alt="Bias explainer showing over-forecasting, under-forecasting, and balanced forecast errors"
        width="680">
 </p>
@@ -316,8 +316,11 @@ In demand planning, Bias helps answer:
 
 > Is the model making random errors, or is it systematically wrong in one direction?
 
-One limitation of Bias is that positive and negative errors can cancel each other out. For example, a model may over-forecast in some periods and under-forecast in others, resulting in a Bias close to zero. This is why Bias should always be interpreted together with MAE, RMSE, and MAPE.
+One limitation of Bias is that positive and negative errors can cancel each other out. For example, a model may over-forecast in some periods and under-forecast in others, resulting in a Bias close to zero.
 
+This is why Bias should always be interpreted together with MAE, RMSE, and MAPE.
+
+---
 
 ## What If the Forecast Validation Is Not Successful?
 
@@ -334,23 +337,29 @@ If the error metrics are too high, or if the model shows a strong positive or ne
 | External factors | Weather, holidays, availability, or economic effects may influence demand |
 | Product behavior | Some SKUs are too volatile or irregular to forecast accurately with a simple model |
 
-After identifying the likely cause, the model can be improved. For example, I could clean the historical data, remove or flag outliers, add relevant regressors such as holidays or promotions, adjust Prophet’s seasonality settings, or test a different forecasting approach.
+After identifying the likely cause, the model can be improved.
 
-In some cases, the conclusion may also be that the product is simply difficult to forecast. For example, low-volume or highly irregular SKUs often produce unstable accuracy metrics. In that case, it may be better to evaluate the forecast at a category level, use simpler planning rules, or combine statistical forecasting with business input.
+For example, I could clean the historical data, remove or flag outliers, add relevant regressors such as holidays or promotions, adjust Prophet’s seasonality settings, or test a different forecasting approach.
+
+In some cases, the conclusion may also be that the product is simply difficult to forecast. For example, low-volume or highly irregular SKUs often produce unstable accuracy metrics.
+
+In that case, it may be better to evaluate the forecast at a category level, use simpler planning rules, or combine statistical forecasting with business input.
 
 The goal of validation is not only to approve or reject a forecast. The real goal is to create a feedback loop:
 
-
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/Image%2001.07.26%20at%2010.16.jpeg"
-       alt="Forecasting continuous improvement"
-       width="550">
+  <img src="Images/forecasting_continuous_improvement.png"
+       alt="Forecasting continuous improvement loop"
+       width="680">
 </p>
 
 <p align="center">
   <em>Figure: Forecasting continuous improvement.</em>
 </p>
 
+A forecast that performs poorly in validation should not be used blindly for inventory or purchasing decisions. Instead, the validation results should guide the next improvement cycle until the forecast is accurate and stable enough for the business decision it supports.
+
+---
 
 ## Running the Train-Test Split in Python
 
@@ -386,10 +395,11 @@ df = df.rename(columns={
 })
 ```
 
+---
+
 ## Creating the Train-Test Split
 
-For this validation, I use the last 12 periods as the validation data.  
-The model is trained on the earlier historical data and then tested on the final year.
+For this validation, I use the last 12 periods as the validation data. The model is trained on the earlier historical data and then tested on the final year.
 
 ```python
 # Number of periods to keep for validation
@@ -406,8 +416,9 @@ print("Validation period:")
 print(test["ds"].min(), "to", test["ds"].max())
 ```
 
-This split is important because time series data should not be split randomly.  
-The model should only learn from the past and then be tested on a later period that represents the future.
+This split is important because time series data should not be split randomly. The model should only learn from the past and then be tested on a later period that represents the future.
+
+---
 
 ## Training the Prophet Model
 
@@ -419,8 +430,9 @@ model = Prophet()
 model.fit(train)
 ```
 
-The validation period is not used during training.  
-This allows me to test whether the model can forecast data it has not seen before.
+The validation period is not used during training. This allows me to test whether the model can forecast data it has not seen before.
+
+---
 
 ## Forecasting the Validation Period
 
@@ -469,11 +481,11 @@ The resulting table contains both the actual sales and the forecasted sales:
 
 This table is the basis for calculating the forecast accuracy metrics.
 
+---
+
 ## Calculating the Validation KPIs with scikit-learn
 
 After creating the validation table, I calculate the forecast accuracy metrics using `scikit-learn`.
-
-> Note: `root_mean_squared_error` requires scikit-learn version 1.4 or higher.
 
 The validation table contains the actual values from the test period and the forecasted values generated by Prophet:
 
@@ -483,7 +495,12 @@ The validation table contains the actual values from the test period and the for
 | `yhat` | Forecasted sales |
 
 ```python
-from sklearn.metrics import mean_absolute_error, root_mean_squared_error, mean_absolute_percentage_error
+from sklearn.metrics import (
+    mean_absolute_error,
+    root_mean_squared_error,
+    mean_absolute_percentage_error
+)
+
 import numpy as np
 import pandas as pd
 
@@ -531,17 +548,22 @@ The table gives a compact overview of the forecast performance:
 A positive Bias means the model tends to over-forecast.  
 A negative Bias means the model tends to under-forecast.
 
-In theory, MAPE is undefined when actual demand is zero because the formula divides by the actual value. In scikit-learn, this does not return infinity, but it can return an extremely large value. For this reason, MAPE should be interpreted carefully when actual demand is very low or equal to zero.
+> [!NOTE]
+> `root_mean_squared_error` requires scikit-learn version 1.4 or higher. If you use an older version, you can calculate RMSE with `mean_squared_error(..., squared=False)`.
 
+> [!WARNING]
+> MAPE can become misleading when actual sales are very low or zero. In those cases, the percentage error can become extremely large, so it should be interpreted together with MAE, RMSE, and Bias.
+
+---
 
 ## Conclusion
 
 Backtesting helps transform a forecast from a simple prediction into something that can be evaluated and trusted.
 
-By splitting the historical data into a training period and a validation period, I can simulate how the model would have performed in a real forecasting situation. The comparison between actual sales and forecasted sales allows me to calculate metrics such as MAE, RMSE, MAPE, and Bias.
+By splitting historical data into a training period and a validation period, I can simulate how the model would have performed in a real forecasting situation. The comparison between actual sales and forecasted sales allows me to calculate metrics such as **MAE**, **RMSE**, **MAPE**, and **Bias**.
 
 Together, these metrics help answer the most important question:
 
 > Is this forecast reliable enough to support business decisions?
 
-If the answer is no, the validation results are still valuable. They show where the model needs to be improved, whether the issue comes from data quality, seasonality, promotions, external factors, or the forecasting method itself.
+If the answer is no, the validation results are still valuable. They show where the model needs to be improved, whether the issue comes from data quality, seasonality, promotions, external factors, or the forecasting method itself.ther the issue comes from data quality, seasonality, promotions, external factors, or the forecasting method itself.
