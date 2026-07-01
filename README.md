@@ -33,7 +33,7 @@ This is why forecast validation is an essential step before using a model for re
 The model is trained on an earlier period and then used to forecast a later period that has already happened. By comparing the forecast with the actual results, we can measure how reliable the model would have been in a real business situation.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/train_test_split.png?raw=true"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/prophet_5yr_split_with_full_dataset%20(1).png"
        alt="Train-test split for forecast validation"
        width="680">
 </p>
