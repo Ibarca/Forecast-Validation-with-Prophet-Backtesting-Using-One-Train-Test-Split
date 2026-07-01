@@ -33,7 +33,7 @@ This is why forecast validation is an essential step before using a model for re
 The model is trained on an earlier period and then used to forecast a later period that has already happened. By comparing the forecast with the actual results, we can measure how reliable the model would have been in a real business situation.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/prophet_5yr_split_with_full_dataset%20(1).png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/prophet_5yr_split_with_full_dataset%20(1).png?raw=true"
        alt="Train-test split for forecast validation"
        width="680">
 </p>
@@ -104,7 +104,7 @@ This comparison is the core of forecast validation. It allows me to calculate er
 Once the forecasted values are compared with the actual sales, the next step is to measure the size and direction of the error.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_dfd.png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_dfd.png?raw=true"
        alt="Forecast validation overview showing the process from train-test split to forecast comparison, metric calculation, and business interpretation"
        width="680">
 </p>
@@ -348,7 +348,7 @@ In that case, it may be better to evaluate the forecast at a category level, use
 The goal of validation is not only to approve or reject a forecast. The real goal is to create a feedback loop:
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_feedback_loop_circular.png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_feedback_loop_circular?raw=true.png"
        alt="Forecasting continuous improvement loop"
        width="680">
 </p>
@@ -397,7 +397,7 @@ df = df.rename(columns={
 
 ---
 
-## Creating the Train-Test Split
+### Creating the Train-Test Split
 
 For this validation, I use the last 12 periods as the validation data. The model is trained on the earlier historical data and then tested on the final year.
 
@@ -420,7 +420,7 @@ This split is important because time series data should not be split randomly. T
 
 ---
 
-## Training the Prophet Model
+### Training the Prophet Model
 
 Once the data is split, I train the Prophet model only on the training data.
 
@@ -434,7 +434,7 @@ The validation period is not used during training. This allows me to test whethe
 
 ---
 
-## Forecasting the Validation Period
+### Forecasting the Validation Period
 
 Next, I ask the model to generate predictions for the same dates that exist in the validation dataset.
 
@@ -483,7 +483,7 @@ This table is the basis for calculating the forecast accuracy metrics.
 
 ---
 
-## Calculating the Validation KPIs with scikit-learn
+### Calculating the Validation KPIs with scikit-learn
 
 After creating the validation table, I calculate the forecast accuracy metrics using `scikit-learn`.
 
@@ -570,4 +570,4 @@ Together, these metrics help answer the most important question:
 
 > Is this forecast reliable enough to support business decisions?
 
-If the answer is no, the validation results are still valuable. They show where the model needs to be improved, whether the issue comes from data quality, seasonality, promotions, external factors, or the forecasting method itself.
+If the answer is no, the validation results are still valuable. They show where the model needs to be improved, whether the issue comes from data quality, seasonality, promotions, external factors, or the forecasting method itself.ƒ
