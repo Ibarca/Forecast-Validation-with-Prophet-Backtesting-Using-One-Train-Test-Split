@@ -24,6 +24,8 @@ This is why forecast validation is an essential step before using a model for re
 
 **Backtesting** allows us to do exactly that: we simulate a real forecasting situation by training the model on one part of the historical data and then testing it on a later period that the model has not seen before.
 
+This article is written as a practical tutorial based on the methodology I used in my data bootcamp final project. The goal is to explain how forecast validation works step by step using a simple train-test split. The same logic can later be applied to real demand planning cases, different products, or more advanced backtesting methods.
+
 ---
 
 ## The Principle of Backtesting
@@ -64,7 +66,7 @@ This is a very practical technique that allows us to evaluate the model in a rea
 This simple train-test split is the foundation of the validation process. It helps move the forecast from something that only looks reasonable to something that can be measured and evaluated.
 
 > [!NOTE]
-> A **train-test split** is a validation technique where the available data is divided into two parts: a **training set** used to fit the model and a **test or validation set** used to evaluate how well the model performs on unseen data.
+> A **train-test split** is a validation technique where the available data is divided into two parts: a **training set** used to fit the model and a **test or validation set** used to evaluate how well the model performs on unseen data. It is a good starting point for understanding forecast validation. More advanced approaches, such as rolling backtesting, test the model across several historical cut-off points.
 
 ---
 
@@ -131,6 +133,9 @@ A forecast can have a reasonable average error but still be systematically too h
 For example, a model that consistently overestimates demand may lead to excess inventory, markdowns, and higher working capital. A model that consistently underestimates demand may lead to stockouts, lost sales, and lower service levels.
 
 This is why forecast validation should look not only at how large the errors are, but also at the direction and consistency of those errors.
+
+> [!NOTE]
+> The values and examples in this article are used for learning purposes. In a real business setting, the acceptable error level depends on demand volatility, product importance, lead time, margin, and service-level targets.
 
 ---
 
@@ -365,7 +370,7 @@ A forecast that performs poorly in validation should not be used blindly for inv
 
 After defining the validation process conceptually, the next step is to implement it in Python.
 
-In my notebook, the dataset is prepared in the format required by Prophet:
+In this example, the dataset is prepared in the format required by Prophet:
 
 | Column | Meaning |
 |---|---|
