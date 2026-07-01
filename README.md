@@ -348,7 +348,7 @@ In that case, it may be better to evaluate the forecast at a category level, use
 The goal of validation is not only to approve or reject a forecast. The real goal is to create a feedback loop:
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecasting_continuous_improvement.png?raw=true"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_feedback_loop_circular.png"
        alt="Forecasting continuous improvement loop"
        width="680">
 </p>
