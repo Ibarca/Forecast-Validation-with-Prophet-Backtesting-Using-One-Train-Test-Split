@@ -75,7 +75,7 @@ Before going into the metrics, it is useful to visualize the full validation pro
 The diagram below shows the logic of the backtesting approach. The historical dataset is split chronologically into two parts: a training period and a validation period. The model learns only from the training data and then generates a forecast for the validation period, which represents the “future” from the model’s perspective.
 
 <p align="center">
-       <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_process%20(1).png?raw=true"
+       <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_dfd.png?raw=true"
        alt="Forecast validation process using a chronological train-test split"
        width="680">
 </p>
@@ -104,7 +104,7 @@ This comparison is the core of forecast validation. It allows me to calculate er
 Once the forecasted values are compared with the actual sales, the next step is to measure the size and direction of the error.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_dfd.png?raw=true"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/8efa3b54c57bc7f14a7ab7ef58206f0ba1eb512d/Images/forecast_validation_overview.png?raw=true"
        alt="Forecast validation overview showing the process from train-test split to forecast comparison, metric calculation, and business interpretation"
        width="680">
 </p>
