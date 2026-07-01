@@ -340,8 +340,6 @@ In some cases, the conclusion may also be that the product is simply difficult t
 
 The goal of validation is not only to approve or reject a forecast. The real goal is to create a feedback loop:
 
-https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/Image%2001.07.26%20at%2010.16.jpeg
-
 
 <p align="center">
   <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/Image%2001.07.26%20at%2010.16.jpeg"
