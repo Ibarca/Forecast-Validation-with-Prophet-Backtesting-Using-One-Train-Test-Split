@@ -24,7 +24,8 @@ This is why forecast validation is an essential step before using a model for re
 
 **Backtesting** allows us to do exactly that: we simulate a real forecasting situation by training the model on one part of the historical data and then testing it on a later period that the model has not seen before.
 
-This article is written as a practical tutorial based on the methodology I used in my data bootcamp final project. The goal is to explain how forecast validation works step by step using a simple train-test split. The same logic can later be applied to real demand planning cases, different products, or more advanced backtesting methods.
+This article is designed as a practical tutorial based on the methodology I applied in my data bootcamp final project. Its purpose is to introduce the main concepts of forecast validation, explain the key KPIs used to evaluate forecast accuracy, and show step by step how a simple train-test split works. The same logic can later be extended to real demand planning scenarios, multiple products, and more advanced backtesting approaches.
+
 
 ---
 
@@ -54,6 +55,13 @@ In this example, the historical dataset is divided into two parts:
 |---|---|
 | First 4 years | Training data |
 | Last 1 year | Validation data |
+
+> 💡 **Important**
+>
+> In forecasting, the train-test split should respect the time order of the data.  
+> The model is trained on the earlier historical period and tested on the most recent period, which simulates a real future forecast.
+>
+> A common practical approach is to use around **70–80% of the data for training** and **20–30% for validation**. However, the exact split depends on the amount of historical data available and the forecasting horizon.
 
 The model is trained only on the first four years of data. The final year is kept aside and is not shown to the model during training.
 
@@ -368,7 +376,18 @@ A forecast that performs poorly in validation should not be used blindly for inv
 
 ## Running the Train-Test Split in Python
 
+## Running the Train-Test Split in Python
+
 After defining the validation process conceptually, the next step is to implement it in Python.
+
+At this stage, part of the data preparation follows the same logic I explained in my previous forecasting tutorial. The dataset still needs to be cleaned, structured, and prepared in the correct format for Prophet, especially by making sure that the date and sales columns follow the expected structure.
+
+Because this preparation process was already covered in more detail in the previous article, I will not go too deep into it again here. Instead, this section focuses on the specific steps needed for forecast validation: splitting the historical data into a training period and a validation period, generating the forecast, comparing the predicted values against the actual values, and evaluating the results using key forecasting KPIs.
+
+If you want to review the initial forecasting setup in more detail, you can check the previous article here:
+
+[Building My First Sales Forecast in Python with Prophet](https://github.com/Ibarca/Building-My-First-Sales-Forecast-in-Python-with-Prophet/blob/main/README.md)
+
 
 In this example, the dataset is prepared in the format required by Prophet:
 
