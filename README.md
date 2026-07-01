@@ -11,7 +11,7 @@ A forecast is ultimately an estimate of future demand. The numbers may look reas
 A sophisticated model can still produce poor forecasts, and relying on inaccurate forecasts can lead to costly business decisions. This is especially important in demand planning, where forecast errors can affect inventory levels, purchasing decisions, service levels, and working capital.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_risk_chain.png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_risk_chain.png?raw=true"
        alt="Forecast risk chain showing how inaccurate forecasts can lead to understocking, overstocking, lost sales, markdowns, cash-flow impact, and customer trust risk"
        width="680">
 </p>
@@ -33,7 +33,7 @@ This is why forecast validation is an essential step before using a model for re
 The model is trained on an earlier period and then used to forecast a later period that has already happened. By comparing the forecast with the actual results, we can measure how reliable the model would have been in a real business situation.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/prophet_5yr_split_with_full_dataset%20(1).png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/train_test_split.png?raw=true"
        alt="Train-test split for forecast validation"
        width="680">
 </p>
@@ -75,7 +75,7 @@ Before going into the metrics, it is useful to visualize the full validation pro
 The diagram below shows the logic of the backtesting approach. The historical dataset is split chronologically into two parts: a training period and a validation period. The model learns only from the training data and then generates a forecast for the validation period, which represents the “future” from the model’s perspective.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_dfd.png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_process%20(1).png?raw=true"
        alt="Forecast validation process using a chronological train-test split"
        width="680">
 </p>
@@ -104,7 +104,7 @@ This comparison is the core of forecast validation. It allows me to calculate er
 Once the forecasted values are compared with the actual sales, the next step is to measure the size and direction of the error.
 
 <p align="center">
-  <img src="Images/forecast_validation_overview.png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_overview.png?raw=true"
        alt="Forecast validation overview showing the process from train-test split to forecast comparison, metric calculation, and business interpretation"
        width="680">
 </p>
@@ -152,7 +152,7 @@ Where:
 For example, if MAE is **120 units**, it means that the forecast was wrong by around **120 units per period**, on average.
 
 <p align="center">
-  <img src="Images/mae_explainer.png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/mae_explainer.png?raw=true"
        alt="MAE explainer showing the average absolute difference between actual and forecasted values"
        width="680">
 </p>
@@ -198,7 +198,7 @@ Because the errors are squared before averaging, large mistakes have a stronger 
 If RMSE is much higher than MAE, it usually means the model made some large errors in certain periods.
 
 <p align="center">
-  <img src="Images/rmse_vs_mae_scenarios.png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/rmse_vs_mae_scenarios.png?raw=true"
        alt="RMSE compared with MAE across different forecast error scenarios"
        width="680">
 </p>
@@ -244,7 +244,7 @@ Where:
 If MAPE is **15%**, it means that the forecast was wrong by around **15% on average** compared with actual demand.
 
 <p align="center">
-  <img src="Images/mape_chart_with_scale.png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/mape_chart_with_scale.png?raw=true"
        alt="MAPE interpretation scale for forecast accuracy"
        width="680">
 </p>
@@ -293,7 +293,7 @@ Where:
 With this formula, a **positive Bias** means the forecast is too high on average, while a **negative Bias** means the forecast is too low on average.
 
 <p align="center">
-  <img src="Images/bias_explainer.png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/bias_explainer.png?raw=true"
        alt="Bias explainer showing over-forecasting, under-forecasting, and balanced forecast errors"
        width="680">
 </p>
@@ -348,13 +348,13 @@ In that case, it may be better to evaluate the forecast at a category level, use
 The goal of validation is not only to approve or reject a forecast. The real goal is to create a feedback loop:
 
 <p align="center">
-  <img src="Images/forecasting_continuous_improvement.png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecasting_continuous_improvement.png?raw=true"
        alt="Forecasting continuous improvement loop"
        width="680">
 </p>
 
 <p align="center">
-  <em>Figure: Forecasting continuous improvement.</em>
+  <em>Figure: Forecasting continuous improvement loop.</em>
 </p>
 
 A forecast that performs poorly in validation should not be used blindly for inventory or purchasing decisions. Instead, the validation results should guide the next improvement cycle until the forecast is accurate and stable enough for the business decision it supports.
@@ -549,7 +549,11 @@ A positive Bias means the model tends to over-forecast.
 A negative Bias means the model tends to under-forecast.
 
 > [!NOTE]
-> `root_mean_squared_error` requires scikit-learn version 1.4 or higher. If you use an older version, you can calculate RMSE with `mean_squared_error(..., squared=False)`.
+> `root_mean_squared_error` requires a recent version of scikit-learn. If your environment does not support it, you can calculate RMSE manually with NumPy.
+
+```python
+rmse = np.sqrt(np.mean((actual - forecasted) ** 2))
+```
 
 > [!WARNING]
 > MAPE can become misleading when actual sales are very low or zero. In those cases, the percentage error can become extremely large, so it should be interpreted together with MAE, RMSE, and Bias.
@@ -566,4 +570,4 @@ Together, these metrics help answer the most important question:
 
 > Is this forecast reliable enough to support business decisions?
 
-If the answer is no, the validation results are still valuable. They show where the model needs to be improved, whether the issue comes from data quality, seasonality, promotions, external factors, or the forecasting method itself.ther the issue comes from data quality, seasonality, promotions, external factors, or the forecasting method itself.
+If the answer is no, the validation results are still valuable. They show where the model needs to be improved, whether the issue comes from data quality, seasonality, promotions, external factors, or the forecasting method itself.
