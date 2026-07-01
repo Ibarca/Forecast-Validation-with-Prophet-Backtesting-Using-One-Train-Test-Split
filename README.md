@@ -527,34 +527,48 @@ The validation table contains the actual values from the test period and the for
 | `y` | Actual sales |
 | `yhat` | Forecasted sales |
 
+
 ```python
-from sklearn.metrics import (
-    mean_absolute_error,
-    root_mean_squared_error,
-    mean_absolute_percentage_error
-)
+# Actual and predicted values
+y_true = validation["y"]
+y_pred = validation["yhat"]
+```
 
+Using **scikit-learn** makes the evaluation process easier because several common regression metrics are already available as built-in functions. Instead of writing every formula manually, I can calculate metrics such as **MAE**, **RMSE**, and **MAPE** in a clean and consistent way.
+
+```python
+from sklearn.metrics import mean_absolute_error, root_mean_squared_error, mean_absolute_percentage_error
 import numpy as np
-import pandas as pd
 
-actual = validation_results["y"]
-forecasted = validation_results["yhat"]
+# Calculate accuracy metrics
+mae = mean_absolute_error(y_true, y_pred)
+rmse = root_mean_squared_error(y_true, y_pred)
+mape = mean_absolute_percentage_error(y_true, y_pred) * 100
+```
 
-# MAE: Mean Absolute Error
-mae = mean_absolute_error(actual, forecasted)
+In this case, scikit-learn helps calculate the main error metrics:
 
-# RMSE: Root Mean Squared Error
-rmse = root_mean_squared_error(actual, forecasted)
+| Metric | What it measures |
+|---|---|
+| **MAE** | The average absolute difference between actual and forecasted values |
+| **RMSE** | The average forecast error, with a stronger penalty for large mistakes |
+| **MAPE** | The average percentage error between actual and forecasted values |
 
-# MAPE: Mean Absolute Percentage Error
-# scikit-learn returns MAPE as a relative value, so I multiply by 100
-mape = mean_absolute_percentage_error(actual, forecasted) * 100
+However, not every forecasting KPI is directly available as a standard scikit-learn function. One important example is **forecast bias**.
 
-# Bias: Average forecast direction
-bias = np.mean(forecasted - actual)
+Bias helps identify whether the model is systematically **overforecasting** or **underforecasting**. Because this metric is more specific to forecast evaluation, I calculate it manually by comparing the forecasted values against the actual values.
 
-# Bias percentage
-bias_pct = (np.sum(forecasted - actual) / np.sum(actual)) * 100
+```python
+# Calculate forecast bias manually
+bias = np.mean(y_pred - y_true)
+bias_percentage = (np.sum(y_pred - y_true) / np.sum(y_true)) * 100
+```
+
+A **positive bias** means that the model tends to forecast too high, while a **negative bias** means that the model tends to forecast too low.
+
+By combining scikit-learn metrics with a manually calculated bias metric, I can evaluate the forecast from two perspectives: how large the errors are and whether the model has a systematic tendency to overestimate or underestimate demand.
+
+
 ```
 
 Then I summarize the results in a table:
