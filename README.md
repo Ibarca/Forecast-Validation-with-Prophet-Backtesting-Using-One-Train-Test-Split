@@ -156,7 +156,7 @@ This is why forecast validation should look not only at how large the errors are
 In simple words, it tells us how far the forecast was from the actual value on average.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/mae.png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/mae.png?raw=true"
        alt="MAE formula"
        width="520">
 </p>
@@ -203,7 +203,7 @@ One limitation of MAE is that it only measures the size of the error. It does no
 This makes it especially useful when large forecast errors are more costly than small ones.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/rmse.png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/rmse.png?raw=true"
        alt="RMSE formula"
        width="520">
 </p>
@@ -309,7 +309,7 @@ While MAE, RMSE, and MAPE tell us how large the error is, Bias tells us whether 
 
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/bias.png"
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/bias.png?raw=true"
        alt="Bias formula"
        width="680">
 </p>
@@ -561,18 +561,19 @@ metrics = pd.DataFrame({
 metrics
 ```
 
-The table gives a compact overview of the forecast performance. In a real validation workflow, this table would show the calculated values for each metric. These values can then be interpreted together rather than relying on a single KPI:
+The table gives a compact overview of the forecast performance. In a real validation workflow, this table would show the calculated values for each metric. These values can then be interpreted together rather than relying on a single KPI
 
-| Metric | Interpretation |
-|---|---|
-| MAE | Average error in units |
-| RMSE | Error metric that penalizes large mistakes |
-| MAPE | Average percentage error |
-| Bias | Average direction of the error |
-| Bias % | Directional error as a percentage of total actual demand |
+Example output:
 
-A positive Bias means the model tends to over-forecast.  
-A negative Bias means the model tends to under-forecast.
+| Metric | Value | Interpretation |
+|---|---:|---|
+| MAE | 120 units | The forecast is wrong by around 120 units per month on average |
+| RMSE | 180 units | Some larger errors are present |
+| MAPE | 15.2% | The forecast error is around 15% of actual demand |
+| Bias | -45 units | The model slightly under-forecasts on average |
+| Bias % | -3.1% | The directional error is small compared with total demand |
+
+
 
 > [!NOTE]
 > `root_mean_squared_error` requires a recent version of scikit-learn. If your environment does not support it, you can calculate RMSE manually with NumPy.
