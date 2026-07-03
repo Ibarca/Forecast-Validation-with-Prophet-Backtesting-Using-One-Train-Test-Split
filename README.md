@@ -1,4 +1,4 @@
-# How I Validate the Forecast: Backtesting with One Train-Test Split
+# How to Validate a Forecast with Prophet: Train-Test Split, Backtesting and Accuracy Metrics
 
 In my previous article, I showed how to build a sales forecast using Prophet. At first glance, it can feel like the hard part is done once the model generates a forecast. After all, we have historical data, we train a model, and it produces predictions for the future.
 
