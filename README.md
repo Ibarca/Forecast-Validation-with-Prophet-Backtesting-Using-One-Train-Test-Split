@@ -27,7 +27,7 @@ This is why forecast validation is an essential step before using a model for re
 
 **Backtesting** allows us to do exactly that: we simulate a real forecasting situation by training the model on one part of the historical data and then testing it on a later period that the model has not seen before.
 
-This article is designed as a practical tutorial based on the methodology I applied in my data bootcamp final project. Its purpose is to introduce the main concepts of forecast validation, explain the key KPIs used to evaluate forecast accuracy, and show step by step how a simple train-test split works. The same logic can later be extended to real demand planning scenarios, multiple products, and more advanced backtesting approaches.
+This article is designed as a practical tutorial based on a demand forecasting workflow I applied in a data analytics project. Its purpose is to introduce the main concepts of forecast validation, explain the key KPIs used to evaluate forecast accuracy, and show step by step how a simple train-test split works. The same logic can later be extended to real demand planning scenarios, multiple products, and more advanced backtesting approaches.
 
 
 ---
@@ -607,6 +607,16 @@ The goal of validation is not only to approve or reject a forecast. The real goa
 A forecast that performs poorly in validation should not be used blindly for inventory or purchasing decisions. Instead, the validation results should guide the next improvement cycle until the forecast is accurate and stable enough for the business decision it supports.
 
 ---
+## Limitations of This Approach
+
+This article uses one chronological train-test split. This is useful for explaining the basic validation logic, but it only evaluates the model on one validation period.
+
+In a professional forecasting workflow, a more robust approach would be rolling backtesting or time-series cross-validation. This means testing the model across several historical cut-off points to see whether the forecast performance is stable over time.
+
+For this article, I use one split because it is simple, intuitive, and a good starting point for understanding forecast validation.
+
+
+---
 
 ## Conclusion
 
@@ -616,6 +626,8 @@ By splitting historical data into a training period and a validation period, I c
 
 Together, these metrics help answer the most important question:
 
-> Is this forecast reliable enough to support business decisions?
+> Can we trust this forecast enough to use it for business decisions?
 
-If the answer is no, the validation results are still valuable. They show where the model needs to be improved, whether the issue comes from data quality, seasonality, promotions, external factors, or the forecasting method itself.ƒ
+A forecast should not only look reasonable. It should be tested against unseen historical data, measured with clear KPIs, and interpreted in relation to the business decision it is meant to support.
+
+This simple train-test split is not the most advanced validation method, but it is a strong starting point. It shows how forecast validation can turn a model output into a more reliable decision-making tool.
