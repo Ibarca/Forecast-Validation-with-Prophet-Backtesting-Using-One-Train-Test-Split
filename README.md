@@ -119,7 +119,9 @@ Once the forecasted values are compared with the actual sales, the next step is 
 
 A forecast will almost never be perfectly correct. Some difference between forecast and actual demand is normal. The important question is whether the error is small enough, stable enough, and unbiased enough to support business decisions.
 
-For this validation, I use four metrics:
+For this validation, I use four main metrics. In supply chain and demand planning environments, **MAPE** and **Bias** are commonly used as key forecast accuracy KPIs. MAPE is useful because it expresses the error as a percentage, while Bias helps identify whether the forecast is systematically too high or too low.
+
+In more machine-learning-oriented workflows, it is common to evaluate several metrics together, such as **MAE**, **RMSE**, **MAPE**, and **Bias**. Libraries like `scikit-learn` make many error metrics easy to calculate and compare. Forecast Bias is usually calculated manually, but it can still be included in the same evaluation table to provide a more complete view of forecast performance.
 
 > [!NOTE]
 > In addition to calculating **Bias in units**, I also calculate **Bias %**.  
