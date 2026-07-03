@@ -519,7 +519,7 @@ y_true = validation_results["y"]
 y_pred = validation_results["yhat"]
 ```
 
-Using **scikit-learn** makes the evaluation process easier because several common regression metrics are already available as built-in functions. Instead of writing every formula manually, I can calculate metrics such as **MAE**, **RMSE**, and **MAPE** in a clean and consistent way.
+With the actual and forecasted values prepared, I can now calculate the validation metrics.
 
 ```python
 from sklearn.metrics import mean_absolute_error, root_mean_squared_error, mean_absolute_percentage_error
