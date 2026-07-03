@@ -125,7 +125,7 @@ In more machine-learning-oriented workflows, it is common to evaluate several me
 
 > [!NOTE]
 > In addition to calculating **Bias in units**, I also calculate **Bias %**.  
-> Bias in units shows the average directional error, while Bias % relates the total forecast bias to total actual demand. This makes it easier to understand whether the over-forecasting or under-forecasting is meaningful compared with the overall sales volume.
+> Bias in units shows the average directional error, while Bias % relates the total forecast bias to total actual demand. This makes it easier to understand whether the overforecasting or underforecasting is meaningful compared with the overall sales volume.
 
 
 | Metric | What it tells us | Why it matters |
@@ -139,7 +139,7 @@ In more machine-learning-oriented workflows, it is common to evaluate several me
 
 Each metric answers a slightly different question. For that reason, I do not rely on only one number to judge the model.
 
-A forecast can have a reasonable average error but still be systematically too high or too low. In demand planning, this distinction matters because over-forecasting and under-forecasting create different business risks.
+A forecast can have a reasonable average error but still be systematically too high or too low. In demand planning, this distinction matters because overforecasting and underforecasting create different business risks.
 
 For example, a model that consistently overestimates demand may lead to excess inventory, markdowns, and higher working capital. A model that consistently underestimates demand may lead to stockouts, lost sales, and lower service levels.
 
@@ -324,7 +324,7 @@ With this formula, a **positive Bias** means the forecast is too high on average
 
 <p align="center">
   <img src="https://github.com/Ibarca/Forecast-Validation-with-Prophet-Backtesting-Using-One-Train-Test-Split/blob/main/Images/bias_explainer.png?raw=true"
-       alt="Bias explainer showing over-forecasting, under-forecasting, and balanced forecast errors"
+       alt="Bias explainer showing overforecasting, underforecasting, and balanced forecast errors"
        width="680">
 </p>
 
@@ -446,7 +446,7 @@ The validation period is not used during training. This allows me to test whethe
 
 ### Forecasting the Validation Period
 
-Next, I ask the model to generate predictions for the same dates that exist in the validation dataset. This is exactly the same process as in [Building My First Sales Forecast in Python with Prophet](https://github.com/Ibarca/Building-My-First-Sales-Forecast-in-Python-with-Prophet/blob/main/README.md) .
+Next, I ask the model to generate predictions for the same dates that exist in the validation dataset. This follows the same logic as in [Building My First Sales Forecast in Python with Prophet](https://github.com/Ibarca/Building-My-First-Sales-Forecast-in-Python-with-Prophet/blob/main/README.md) .
 
 ```python
 future = test[["ds"]]
@@ -564,9 +564,10 @@ metrics = pd.DataFrame({
 metrics
 ```
 
-The table gives a compact overview of the forecast performance. In a real validation workflow, this table would show the calculated values for each metric. These values can then be interpreted together rather than relying on a single KPI
+The table gives a compact overview of the forecast performance. In a real validation workflow, this table would show the calculated values for each metric. These values can then be interpreted together rather than relying on a single KPI.
 
-Example output:
+
+Example output using illustrative values:
 
 | Metric | Value | Interpretation |
 |---|---:|---|
