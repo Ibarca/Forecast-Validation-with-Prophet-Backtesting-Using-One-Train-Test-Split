@@ -11,7 +11,7 @@ A forecast is ultimately an estimate of future demand. The numbers may look reas
 A sophisticated model can still produce poor forecasts, and relying on inaccurate forecasts can lead to costly business decisions. This is especially important in demand planning, where forecast errors can affect inventory levels, purchasing decisions, service levels, and working capital.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_risk_chain.png?raw=true"
+  <img src="https://github.com/Ibarca/Forecast-Validation-with-Prophet-Backtesting-Using-One-Train-Test-Split/blob/main/Images/forecast_risk_chain.png?raw=true"
        alt="Forecast risk chain showing how inaccurate forecasts can lead to understocking, overstocking, lost sales, markdowns, cash-flow impact, and customer trust risk"
        width="680">
 </p>
@@ -36,7 +36,7 @@ This article is designed as a practical tutorial based on a demand forecasting w
 The model is trained on an earlier period and then used to forecast a later period that has already happened. By comparing the forecast with the actual results, we can measure how reliable the model would have been in a real business situation.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/68795a59317f485281539f971378714d804fa458/Images/prophet_5yr_split_with_full_dataset%20(1).png?raw=true"
+  <img src="https://github.com/Ibarca/Forecast-Validation-with-Prophet-Backtesting-Using-One-Train-Test-Split/blob/68795a59317f485281539f971378714d804fa458/Images/prophet_5yr_split_with_full_dataset%20(1).png?raw=true"
        alt="Train-test split for forecast validation"
        width="680">
 </p>
@@ -81,7 +81,7 @@ This simple train-test split is the foundation of the validation process. It hel
 The diagram summarizes the same logic visually: train on the earlier period, forecast the validation period, compare forecasted sales with actual sales, and then calculate the validation metrics.
 
 <p align="center">
-       <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_dfd.png?raw=true"
+       <img src="https://github.com/Ibarca/Forecast-Validation-with-Prophet-Backtesting-Using-One-Train-Test-Split/blob/main/Images/forecast_validation_dfd.png?raw=true"
        alt="Forecast validation process using a chronological train-test split"
        width="680">
 </p>
@@ -108,7 +108,7 @@ This comparison is the core of forecast validation. It allows me to calculate er
 Once the forecasted values are compared with the actual sales, the next step is to measure the size and direction of the error.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/8efa3b54c57bc7f14a7ab7ef58206f0ba1eb512d/Images/forecast_validation_overview.png?raw=true"
+  <img src="https://github.com/Ibarca/Forecast-Validation-with-Prophet-Backtesting-Using-One-Train-Test-Split/blob/8efa3b54c57bc7f14a7ab7ef58206f0ba1eb512d/Images/forecast_validation_overview.png?raw=true"
        alt="Forecast validation overview showing the process from train-test split to forecast comparison, metric calculation, and business interpretation"
        width="680">
 </p>
@@ -119,7 +119,7 @@ Once the forecasted values are compared with the actual sales, the next step is 
 
 A forecast will almost never be perfectly correct. Some difference between forecast and actual demand is normal. The important question is whether the error is small enough, stable enough, and unbiased enough to support business decisions.
 
-For this validation, I use four main metrics. In supply chain and demand planning environments, **MAPE** and **Bias** are commonly used as key forecast accuracy KPIs. MAPE is useful because it expresses the error as a percentage, while Bias helps identify whether the forecast is systematically too high or too low.
+For this validation, I use five main metrics. In supply chain and demand planning environments, **MAPE** and **Bias** are commonly used as key forecast accuracy KPIs. MAPE is useful because it expresses the error as a percentage, while Bias helps identify whether the forecast is systematically too high or too low.
 
 In more machine-learning-oriented workflows, it is common to evaluate several metrics together, such as **MAE**, **RMSE**, **MAPE**, and **Bias**. Libraries like `scikit-learn` make many error metrics easy to calculate and compare. Forecast Bias is usually calculated manually, but it can still be included in the same evaluation table to provide a more complete view of forecast performance.
 
@@ -156,7 +156,7 @@ This is why forecast validation should look not only at how large the errors are
 In simple words, it tells us how far the forecast was from the actual value on average.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/mae.png?raw=true"
+  <img src="https://github.com/Ibarca/Forecast-Validation-with-Prophet-Backtesting-Using-One-Train-Test-Split/blob/main/Images/mae.png?raw=true"
        alt="MAE formula"
        width="520">
 </p>
@@ -171,7 +171,7 @@ Where:
 For example, if MAE is **120 units**, it means that the forecast was wrong by around **120 units per period**, on average.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/mae_explainer.png?raw=true"
+  <img src="https://github.com/Ibarca/Forecast-Validation-with-Prophet-Backtesting-Using-One-Train-Test-Split/blob/main/Images/mae_explainer.png?raw=true"
        alt="MAE explainer showing the average absolute difference between actual and forecasted values"
        width="680">
 </p>
@@ -203,7 +203,7 @@ One limitation of MAE is that it only measures the size of the error. It does no
 This makes it especially useful when large forecast errors are more costly than small ones.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/rmse.png?raw=true"
+  <img src="https://github.com/Ibarca/Forecast-Validation-with-Prophet-Backtesting-Using-One-Train-Test-Split/blob/main/Images/rmse.png?raw=true"
        alt="RMSE formula"
        width="520">
 </p>
@@ -221,7 +221,7 @@ Because the errors are squared before averaging, large mistakes have a stronger 
 If RMSE is much higher than MAE, it usually means the model made some large errors in certain periods.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/rmse_vs_mae_scenarios.png?raw=true"
+  <img src="https://github.com/Ibarca/Forecast-Validation-with-Prophet-Backtesting-Using-One-Train-Test-Split/blob/main/Images/rmse_vs_mae_scenarios.png?raw=true"
        alt="RMSE compared with MAE across different forecast error scenarios"
        width="680">
 </p>
@@ -256,7 +256,7 @@ This makes it useful when comparing forecast accuracy across different products,
 
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/mape.png?raw=true"
+  <img src="https://github.com/Ibarca/Forecast-Validation-with-Prophet-Backtesting-Using-One-Train-Test-Split/blob/main/Images/mape.png?raw=true"
        alt="MAPE formula"
        width="680">
 </p>
@@ -271,7 +271,7 @@ Where:
 If MAPE is **15%**, it means that the forecast was wrong by around **15% on average** compared with actual demand.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/mape_chart_with_scale.png?raw=true"
+  <img src="https://github.com/Ibarca/Forecast-Validation-with-Prophet-Backtesting-Using-One-Train-Test-Split/blob/main/Images/mape_chart_with_scale.png?raw=true"
        alt="MAPE interpretation scale for forecast accuracy"
        width="680">
 </p>
@@ -309,7 +309,7 @@ While MAE, RMSE, and MAPE tell us how large the error is, Bias tells us whether 
 
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/bias.png?raw=true"
+  <img src="https://github.com/Ibarca/Forecast-Validation-with-Prophet-Backtesting-Using-One-Train-Test-Split/blob/main/Images/bias.png?raw=true"
        alt="Bias formula"
        width="680">
 </p>
@@ -323,7 +323,7 @@ Where:
 With this formula, a **positive Bias** means the forecast is too high on average, while a **negative Bias** means the forecast is too low on average.
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/bias_explainer.png?raw=true"
+  <img src="https://github.com/Ibarca/Forecast-Validation-with-Prophet-Backtesting-Using-One-Train-Test-Split/blob/main/Images/bias_explainer.png?raw=true"
        alt="Bias explainer showing over-forecasting, under-forecasting, and balanced forecast errors"
        width="680">
 </p>
@@ -618,7 +618,7 @@ In that case, it may be better to evaluate the forecast at a category level, use
 The goal of validation is not only to approve or reject a forecast. The real goal is to create a feedback loop:
 
 <p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_feedback_loop_circular.png?raw=true"
+  <img src="https://github.com/Ibarca/Forecast-Validation-with-Prophet-Backtesting-Using-One-Train-Test-Split/blob/main/Images/forecast_feedback_loop_circular.png?raw=true"
        alt="Forecasting continuous improvement loop"
        width="680">
 </p>
