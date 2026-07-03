@@ -1,10 +1,13 @@
-# How to Validate a Forecast with Prophet: Train-Test Split, Backtesting and Accuracy Metrics
+# Forecast Validation with Prophet: Backtesting with One Train-Test Split
+
 
 In my previous article, I showed how to build a sales forecast using Prophet. At first glance, it can feel like the hard part is done once the model generates a forecast. After all, we have historical data, we train a model, and it produces predictions for the future.
 
 But there is an important question that comes before we use those predictions to make decisions:
 
 > Can we trust them?
+
+<br> 
 
 A forecast is ultimately an estimate of future demand. The numbers may look reasonable, but without evaluating the model’s performance, we have no way of knowing whether those predictions are actually useful.
 
@@ -42,25 +45,28 @@ The model is trained on an earlier period and then used to forecast a later peri
 </p>
 
 <p align="center">
-  <em>Figure: Example of a chronological train-test split for forecast validation.</em>
+  <em>Figure: Example of a chronological train-test split</em>
 </p>
 
 To run the backtest, I used a simple **train-test split**.
 
 In time series forecasting, the data should not be split randomly. The order of time matters. A forecasting model should only learn from the past and then be tested on a later period that represents the future.
 
-In this example, the historical dataset is divided into two parts:
+In this example, the dataset contains five years of monthly sales data.
 
 | Period | Purpose |
 |---|---|
 | First 4 years | Training data |
-| Last 1 year | Validation data |
+| Final 12 months | Validation data |
 
 > [!IMPORTANT]
 > In forecasting, the train-test split should respect the time order of the data. The model is trained on the earlier historical period and tested on the most recent period, which simulates a real future forecast.
 >
 > A common practical approach is to use around **70–80% of the data for training** and **20–30% for validation**. The exact split depends on the amount of historical data available and the forecasting horizon.
+
 In this example, the model is trained only on the first four years of data. The final year is kept aside and is not shown to the model during training.
+
+
 
 After the model has learned from the training period, it generates a forecast for the validation period. Because this period already happened in reality, I can compare the forecasted values with the actual sales values.
 
@@ -71,15 +77,13 @@ This is a very practical technique that allows us to evaluate the model in a rea
 This simple train-test split is the foundation of the validation process. It helps move the forecast from something that only looks reasonable to something that can be measured and evaluated.
 
 > [!NOTE]
-> A **train-test split** is a validation technique where the available data is divided into two parts: a **training set** used to fit the model and a **test or validation set** used to evaluate how well the model performs on unseen data. It is a good starting point for understanding forecast validation. More advanced approaches, such as rolling backtesting, test the model across several historical cut-off points.
+> A **train-test split** is a validation technique where the available data is divided into two parts: a **training set** used to fit the model and a **validation set** used to evaluate how well the model performs on unseen data. It is a good starting point for understanding forecast validation. More advanced approaches, such as rolling backtesting, test the model across several historical cut-off points.
 
 ---
 
 ## How the Validation Process Works
 
-Before going into the metrics, it is useful to visualize the full validation process.
-
-The diagram below shows the logic of the backtesting approach. The historical dataset is split chronologically into two parts: a training period and a validation period. The model learns only from the training data and then generates a forecast for the validation period, which represents the “future” from the model’s perspective.
+The diagram summarizes the same logic visually: train on the earlier period, forecast the validation period, compare forecasted sales with actual sales, and then calculate the validation metrics.
 
 <p align="center">
        <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_validation_dfd.png?raw=true"
@@ -332,44 +336,6 @@ This is why Bias should always be interpreted together with MAE, RMSE, and MAPE.
 
 ---
 
-## What If the Forecast Validation Is Not Successful?
-
-Sometimes the validation results show that the forecast is not reliable enough. This does not mean the process failed. In fact, this is exactly why backtesting is useful: it helps identify problems before the forecast is used for real business decisions.
-
-If the error metrics are too high, or if the model shows a strong positive or negative Bias, the next step is to understand why the forecast is not performing well.
-
-| Area to Check | Why It Matters |
-|---|---|
-| Data quality | Missing values, wrong dates, outliers, or stockout periods can distort the model |
-| Seasonality | The model may not fully capture monthly, weekly, or yearly demand patterns |
-| Trend changes | Demand may have shifted due to assortment changes, pricing, or market conditions |
-| Promotions or campaigns | Marketing activity can create demand spikes that the model does not understand |
-| External factors | Weather, holidays, availability, or economic effects may influence demand |
-| Product behavior | Some SKUs are too volatile or irregular to forecast accurately with a simple model |
-
-After identifying the likely cause, the model can be improved.
-
-For example, I could clean the historical data, remove or flag outliers, add relevant regressors such as holidays or promotions, adjust Prophet’s seasonality settings, or test a different forecasting approach.
-
-In some cases, the conclusion may also be that the product is simply difficult to forecast. For example, low-volume or highly irregular SKUs often produce unstable accuracy metrics.
-
-In that case, it may be better to evaluate the forecast at a category level, use simpler planning rules, or combine statistical forecasting with business input.
-
-The goal of validation is not only to approve or reject a forecast. The real goal is to create a feedback loop:
-
-<p align="center">
-  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_feedback_loop_circular.png?raw=true"
-       alt="Forecasting continuous improvement loop"
-       width="680">
-</p>
-
-<p align="center">
-  <em>Figure: Forecasting continuous improvement loop.</em>
-</p>
-
-A forecast that performs poorly in validation should not be used blindly for inventory or purchasing decisions. Instead, the validation results should guide the next improvement cycle until the forecast is accurate and stable enough for the business decision it supports.
-
----
 
 
 ## Running the Train-Test Split in Python
@@ -399,6 +365,12 @@ import pandas as pd
 import numpy as np
 from prophet import Prophet
 
+# Rename columns to Prophet format
+df = df.rename(columns={
+    "Month": "ds",
+    "Sales": "y"
+})
+
 # Make sure the date column is in datetime format
 df["ds"] = pd.to_datetime(df["ds"])
 
@@ -406,21 +378,13 @@ df["ds"] = pd.to_datetime(df["ds"])
 df = df.sort_values("ds").reset_index(drop=True)
 ```
 
-If the original dataset still uses different column names, I first rename them:
-
-```python
-df = df.rename(columns={
-    "Month": "ds",
-    "Sales": "y"
-})
-```
 
 ---
 
 ### Creating the Train-Test Split
 
 
-For this validation, I use the last **12 periods** as the validation data. Since the dataset is structured at a monthly level, this means that the final 12 months are kept aside and used as the test period.
+For this validation, I use the last **12 periods** as the validation data. Since the dataset is structured at a monthly level, this means that the final 12 months are kept aside and used as the validation period.
 
 The model is trained only on the earlier historical data. After that, it generates a forecast for the final year, which is then compared against the actual sales values from the validation period.
 
@@ -530,8 +494,8 @@ The validation table contains the actual values from the test period and the for
 
 ```python
 # Actual and predicted values
-y_true = validation["y"]
-y_pred = validation["yhat"]
+y_true = validation_results["y"]
+y_pred = validation_results["yhat"]
 ```
 
 Using **scikit-learn** makes the evaluation process easier because several common regression metrics are already available as built-in functions. Instead of writing every formula manually, I can calculate metrics such as **MAE**, **RMSE**, and **MAPE** in a clean and consistent way.
@@ -561,15 +525,14 @@ Bias helps identify whether the model is systematically **overforecasting** or *
 ```python
 # Calculate forecast bias manually
 bias = np.mean(y_pred - y_true)
-bias_percentage = (np.sum(y_pred - y_true) / np.sum(y_true)) * 100
+bias_pct = (np.sum(y_pred - y_true) / np.sum(y_true)) * 100
+
 ```
 
 A **positive bias** means that the model tends to forecast too high, while a **negative bias** means that the model tends to forecast too low.
 
 By combining scikit-learn metrics with a manually calculated bias metric, I can evaluate the forecast from two perspectives: how large the errors are and whether the model has a systematic tendency to overestimate or underestimate demand.
 
-
-```
 
 Then I summarize the results in a table:
 
@@ -599,11 +562,49 @@ A negative Bias means the model tends to under-forecast.
 > `root_mean_squared_error` requires a recent version of scikit-learn. If your environment does not support it, you can calculate RMSE manually with NumPy.
 
 ```python
-rmse = np.sqrt(np.mean((actual - forecasted) ** 2))
+rmse = np.sqrt(np.mean((y_true - y_pred) ** 2))
 ```
 
 > [!WARNING]
 > MAPE can become misleading when actual sales are very low or zero. In those cases, the percentage error can become extremely large, so it should be interpreted together with MAE, RMSE, and Bias.
+
+---
+## What If the Forecast Validation Is Not Successful?
+
+Sometimes the validation results show that the forecast is not reliable enough. This does not mean the process failed. In fact, this is exactly why backtesting is useful: it helps identify problems before the forecast is used for real business decisions.
+
+If the error metrics are too high, or if the model shows a strong positive or negative Bias, the next step is to understand why the forecast is not performing well.
+
+| Area to Check | Why It Matters |
+|---|---|
+| Data quality | Missing values, wrong dates, outliers, or stockout periods can distort the model |
+| Seasonality | The model may not fully capture monthly, weekly, or yearly demand patterns |
+| Trend changes | Demand may have shifted due to assortment changes, pricing, or market conditions |
+| Promotions or campaigns | Marketing activity can create demand spikes that the model does not understand |
+| External factors | Weather, holidays, availability, or economic effects may influence demand |
+| Product behavior | Some SKUs are too volatile or irregular to forecast accurately with a simple model |
+
+After identifying the likely cause, the model can be improved.
+
+For example, I could clean the historical data, remove or flag outliers, add relevant regressors such as holidays or promotions, adjust Prophet’s seasonality settings, or test a different forecasting approach.
+
+In some cases, the conclusion may also be that the product is simply difficult to forecast. For example, low-volume or highly irregular SKUs often produce unstable accuracy metrics.
+
+In that case, it may be better to evaluate the forecast at a category level, use simpler planning rules, or combine statistical forecasting with business input.
+
+The goal of validation is not only to approve or reject a forecast. The real goal is to create a feedback loop:
+
+<p align="center">
+  <img src="https://github.com/Ibarca/forecast-validation-and-backtesting-/blob/main/Images/forecast_feedback_loop_circular.png?raw=true"
+       alt="Forecasting continuous improvement loop"
+       width="680">
+</p>
+
+<p align="center">
+  <em>Figure: Forecasting continuous improvement loop.</em>
+</p>
+
+A forecast that performs poorly in validation should not be used blindly for inventory or purchasing decisions. Instead, the validation results should guide the next improvement cycle until the forecast is accurate and stable enough for the business decision it supports.
 
 ---
 
