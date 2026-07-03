@@ -258,7 +258,7 @@ This makes it useful when comparing forecast accuracy across different products,
 <p align="center">
   <img src="https://github.com/Ibarca/Forecast-Validation-with-Prophet-Backtesting-Using-One-Train-Test-Split/blob/main/Images/mape.png?raw=true"
        alt="MAPE formula"
-       width="680">
+       width="520">
 </p>
 
 
@@ -311,7 +311,7 @@ While MAE, RMSE, and MAPE tell us how large the error is, Bias tells us whether 
 <p align="center">
   <img src="https://github.com/Ibarca/Forecast-Validation-with-Prophet-Backtesting-Using-One-Train-Test-Split/blob/main/Images/bias.png?raw=true"
        alt="Bias formula"
-       width="680">
+       width="520">
 </p>
 
 Where:
