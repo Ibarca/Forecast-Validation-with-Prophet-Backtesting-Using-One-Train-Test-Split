@@ -121,12 +121,19 @@ A forecast will almost never be perfectly correct. Some difference between forec
 
 For this validation, I use four metrics:
 
+> [!NOTE]
+> In addition to calculating **Bias in units**, I also calculate **Bias %**.  
+> Bias in units shows the average directional error, while Bias % relates the total forecast bias to total actual demand. This makes it easier to understand whether the over-forecasting or under-forecasting is meaningful compared with the overall sales volume.
+
+
 | Metric | What it tells us | Why it matters |
 |---|---|---|
 | MAE | Average size of the error | Easy to understand in units sold |
 | RMSE | Size of the error with higher penalty for large mistakes | Useful when big errors are especially costly |
 | MAPE | Error as a percentage | Useful to compare accuracy across products or periods |
-| Bias | Direction of the error | Shows whether the model tends to over-forecast or under-forecast |
+| Bias | Direction of the error in units | Shows whether the model tends to over-forecast or under-forecast |
+| Bias % | Directional error compared with total actual demand | Shows whether the forecast bias is significant relative to total sales volume |
+
 
 Each metric answers a slightly different question. For that reason, I do not rely on only one number to judge the model.
 
