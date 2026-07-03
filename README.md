@@ -1,6 +1,6 @@
 # Forecast Validation with Prophet: Backtesting Using One Train-Test Split
 
-In my previous article, I showed how to build a sales forecast using Prophet. At first glance, it can feel like the hard part is done once the model generates a forecast. After all, we have historical data, we train a model, and it produces predictions for the future.
+In my previous article, [Building My First Sales Forecast in Python with Prophet](https://github.com/Ibarca/Building-My-First-Sales-Forecast-in-Python-with-Prophet/blob/main/README.md), I showed how to build a sales forecast using Prophet. At first glance, it can feel like the hard part is done once the model generates a forecast. After all, we have historical data, we train a model, and it produces predictions for the future.
 
 But there is an important question that comes before we use those predictions to make decisions:
 
