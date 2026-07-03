@@ -119,13 +119,15 @@ Once the forecasted values are compared with the actual sales, the next step is 
 
 A forecast will almost never be perfectly correct. Some difference between forecast and actual demand is normal. The important question is whether the error is small enough, stable enough, and unbiased enough to support business decisions.
 
-For this validation, I use five main metrics. In supply chain and demand planning environments, **MAPE** and **Bias** are commonly used as key forecast accuracy KPIs. MAPE is useful because it expresses the error as a percentage, while Bias helps identify whether the forecast is systematically too high or too low.
+For this validation, I use four main forecast accuracy metrics: **MAE**, **RMSE**, **MAPE**, and **Bias**. I also calculate **Bias %** as an additional derived KPI to relate the directional error to total actual demand.
 
-In more machine-learning-oriented workflows, it is common to evaluate several metrics together, such as **MAE**, **RMSE**, **MAPE**, and **Bias**. Libraries like `scikit-learn` make many error metrics easy to calculate and compare. Forecast Bias is usually calculated manually, but it can still be included in the same evaluation table to provide a more complete view of forecast performance.
+In supply chain and demand planning environments, **MAPE** and **Bias** are commonly used as key forecast accuracy KPIs. MAPE is useful because it expresses the error as a percentage, while Bias helps identify whether the forecast is systematically too high or too low.
+
+In more machine-learning-oriented workflows however, it is common to evaluate several metrics together, such as **MAE**, **RMSE**, **MAPE**, and **Bias**. Libraries like `scikit-learn` make many error metrics easy to calculate and compare. Forecast Bias is usually calculated manually, but it can still be included in the same evaluation table to provide a more complete view of forecast performance.
 
 > [!NOTE]
 > In addition to calculating **Bias in units**, I also calculate **Bias %**.  
-> Bias in units shows the average directional error, while Bias % relates the total forecast bias to total actual demand. This makes it easier to understand whether the overforecasting or underforecasting is meaningful compared with the overall sales volume.
+> Bias in units shows the average directional error, while Bias % relates the total forecast bias to total actual demand. This makes it easier to understand whether the over-forecasting or underforecasting is meaningful compared with the overall sales volume.
 
 
 | Metric | What it tells us | Why it matters |
@@ -139,7 +141,7 @@ In more machine-learning-oriented workflows, it is common to evaluate several me
 
 Each metric answers a slightly different question. For that reason, I do not rely on only one number to judge the model.
 
-A forecast can have a reasonable average error but still be systematically too high or too low. In demand planning, this distinction matters because overforecasting and underforecasting create different business risks.
+A forecast can have a reasonable average error but still be systematically too high or too low. In demand planning, this distinction matters because over-forecasting and underforecasting create different business risks.
 
 For example, a model that consistently overestimates demand may lead to excess inventory, markdowns, and higher working capital. A model that consistently underestimates demand may lead to stockouts, lost sales, and lower service levels.
 
@@ -324,7 +326,7 @@ With this formula, a **positive Bias** means the forecast is too high on average
 
 <p align="center">
   <img src="https://github.com/Ibarca/Forecast-Validation-with-Prophet-Backtesting-Using-One-Train-Test-Split/blob/main/Images/bias_explainer.png?raw=true"
-       alt="Bias explainer showing overforecasting, underforecasting, and balanced forecast errors"
+       alt="Bias explainer showing over-forecasting, underforecasting, and balanced forecast errors"
        width="680">
 </p>
 
@@ -539,7 +541,7 @@ In this case, scikit-learn helps calculate the main error metrics:
 
 However, not every forecasting KPI is directly available as a standard scikit-learn function. One important example is **forecast bias**.
 
-Bias helps identify whether the model is systematically **overforecasting** or **underforecasting**. Because this metric is more specific to forecast evaluation, I calculate it manually by comparing the forecasted values against the actual values.
+Bias helps identify whether the model is systematically **over-forecasting** or **underforecasting**. Because this metric is more specific to forecast evaluation, I calculate it manually by comparing the forecasted values against the actual values.
 
 ```python
 # Calculate forecast bias manually
