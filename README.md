@@ -146,9 +146,9 @@ This is why forecast validation should look not only at how large the errors are
 **MAE** measures the average size of the forecast error in absolute terms.  
 In simple words, it tells us how far the forecast was from the actual value on average.
 
-$$
+```math
 MAE = \frac{1}{n}\sum_{i=1}^{n}|A_i - F_i|
-$$
+```
 
 Where:
 
@@ -190,9 +190,9 @@ One limitation of MAE is that it only measures the size of the error. It does no
 **RMSE** measures forecast error like MAE, but it gives more weight to large mistakes.  
 This makes it especially useful when large forecast errors are more costly than small ones.
 
-$$
+```math
 RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(A_i - F_i)^2}
-$$
+```
 
 Where:
 
@@ -238,9 +238,9 @@ One limitation of RMSE is that it can be heavily influenced by a few extreme err
 **MAPE** expresses the forecast error as a percentage of actual demand.  
 This makes it useful when comparing forecast accuracy across different products, categories, or time periods.
 
-$$
+```math
 MAPE = \frac{1}{n}\sum_{i=1}^{n}\left|\frac{A_i - F_i}{A_i}\right| \times 100\%
-$$
+```
 
 Where:
 
@@ -287,9 +287,9 @@ For this reason, MAPE is useful for business interpretation, but it should not b
 **Bias** shows the direction of the forecast error.  
 While MAE, RMSE, and MAPE tell us how large the error is, Bias tells us whether the model tends to over-forecast or under-forecast.
 
-$$
+```math
 Bias = \frac{1}{n}\sum_{i=1}^{n}(F_i - A_i)
-$$
+```
 
 Where:
 
